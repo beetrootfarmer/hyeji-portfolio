@@ -5,15 +5,17 @@ import './Hero.css';
 
 const copy = {
   en: {
-    titleLine1: 'HYE JI',
-    titleAccent: 'ASKS QUESTIONS',
-    tagline: 'Art came from questions. So does good code.',
+    titleLine1: 'ONE QUESTION',
+    titleAccent: 'LEADS TO ANOTHER',
+    tagline:
+      "A PM's intent, a user's flow, a teammate's understanding — solving one only opens the next question. I keep that chain moving.",
     sub: 'A fine arts major turned 3-year frontend developer, still asking why — now exploring better answers in code.',
   },
   ko: {
-    titleLine1: '혜지는',
-    titleAccent: '질문합니다',
-    tagline: '작품은 질문에서 나왔다. 좋은 코드도 질문에서 나온다.',
+    titleLine1: '꼬리를 무는',
+    titleAccent: '질문',
+    tagline:
+      '기획자의 의도, 사용자의 동선, 동료의 이해 — 하나를 풀면 다음 질문이 이어집니다. 저는 그 흐름을 멈추지 않습니다.',
     sub: '순수예술을 전공했고, 지금은 3년차 프론트엔드 개발자입니다. 여전히 왜냐고 묻고, 이제는 코드로 더 나은 답을 탐구합니다.',
   },
 } as const;

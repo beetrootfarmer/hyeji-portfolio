@@ -2,9 +2,8 @@ import { motion } from 'framer-motion';
 import './Footer.css';
 
 const links = [
-  { label: 'Email', href: 'mailto:hello@example.com' },
-  { label: 'GitHub', href: 'https://github.com/' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/' },
+  { label: 'Email', href: 'mailto:pos04118@gmail.com' },
+  { label: 'GitHub', href: 'https://github.com/beetrootfarmer' },
 ];
 
 export function Footer() {

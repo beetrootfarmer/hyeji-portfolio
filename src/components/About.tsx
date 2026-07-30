@@ -4,7 +4,7 @@ import { SpiralMark } from './SpiralMark';
 import './About.css';
 
 const facts = [
-  { label: 'Background', value: 'B.A. in Design' },
+  { label: 'Background', value: 'B.A. in Fine Arts, Gachon University' },
   { label: 'Now', value: 'Frontend Developer' },
   { label: 'Tools', value: 'React · TypeScript · Figma' },
   { label: 'Based in', value: 'Seoul, KR' },
