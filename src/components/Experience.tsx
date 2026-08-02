@@ -5,9 +5,9 @@ import './Experience.css';
 
 const content = {
   en: {
+    eyebrow: 'Experience',
     careerLabel: 'Career',
     educationLabel: 'Education',
-    present: 'Present',
     jobs: [
       {
         period: 'Dec 2025 — Present',
@@ -47,9 +47,9 @@ const content = {
     ],
   },
   ko: {
+    eyebrow: '이력',
     careerLabel: '경력',
     educationLabel: '학력',
-    present: '재직중',
     jobs: [
       {
         period: '2025.12 — 재직중',
@@ -102,7 +102,7 @@ export function Experience() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.6 }}
       >
-        Experience
+        {text.eyebrow}
       </motion.p>
 
       <div className="experience-block">

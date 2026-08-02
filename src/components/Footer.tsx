@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useLocale } from '../i18n/LocaleContext';
 import './Footer.css';
 
 const links = [
@@ -6,7 +7,21 @@ const links = [
   { label: 'GitHub', href: 'https://github.com/beetrootfarmer' },
 ];
 
+const text = {
+  en: {
+    heading: ["Let's make", 'something.'],
+    note: (year: number) => `© ${year} HyeJi. Built with React, Vite & Framer Motion.`,
+  },
+  ko: {
+    heading: ['함께', '만들어요.'],
+    note: (year: number) => `© ${year} HyeJi. React, Vite, Framer Motion으로 제작.`,
+  },
+} as const;
+
 export function Footer() {
+  const { locale } = useLocale();
+  const t = text[locale];
+
   return (
     <footer className="footer section" id="contact">
       <motion.h2
@@ -16,9 +31,9 @@ export function Footer() {
         viewport={{ once: true, amount: 0.6 }}
         transition={{ duration: 0.6 }}
       >
-        Let's make
+        {t.heading[0]}
         <br />
-        something.
+        {t.heading[1]}
       </motion.h2>
 
       <div className="footer-links">
@@ -29,7 +44,7 @@ export function Footer() {
         ))}
       </div>
 
-      <p className="footer-note">© {new Date().getFullYear()} HyeJi. Built with React, Vite & Framer Motion.</p>
+      <p className="footer-note">{t.note(new Date().getFullYear())}</p>
     </footer>
   );
 }

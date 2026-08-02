@@ -3,12 +3,22 @@ import { useLocale } from '../i18n/LocaleContext';
 import { SpiralMark } from './SpiralMark';
 import './About.css';
 
-const facts = [
-  { label: 'Background', value: 'B.A. in Fine Arts, Gachon University' },
-  { label: 'Now', value: 'Frontend Developer' },
-  { label: 'Tools', value: 'React · TypeScript · Figma' },
-  { label: 'Based in', value: 'Seoul, KR' },
-];
+const facts = {
+  en: [
+    { label: 'Background', value: 'B.A. in Fine Arts, Gachon University' },
+    { label: 'Now', value: 'Frontend Developer' },
+    { label: 'Tools', value: 'React · TypeScript · Figma' },
+    { label: 'Based in', value: 'Seoul, KR' },
+  ],
+  ko: [
+    { label: '배경', value: '가천대학교 미술디자인학부 학사' },
+    { label: '현재', value: '프론트엔드 개발자' },
+    { label: '도구', value: 'React · TypeScript · Figma' },
+    { label: '거주지', value: '서울, 대한민국' },
+  ],
+} as const;
+
+const eyebrow = { en: 'About', ko: '소개' } as const;
 
 const essays = {
   en: [
@@ -56,7 +66,7 @@ export function About() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.6 }}
       >
-        About
+        {eyebrow[locale]}
       </motion.p>
 
       <div className="about-essays">
@@ -86,7 +96,7 @@ export function About() {
       </div>
 
       <div className="about-facts">
-        {facts.map((fact, index) => (
+        {facts[locale].map((fact, index) => (
           <motion.div
             className="about-fact"
             key={fact.label}

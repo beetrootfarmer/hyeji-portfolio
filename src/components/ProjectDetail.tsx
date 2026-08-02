@@ -1,8 +1,30 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import type { Project } from '../data/types';
+import { useLocale } from '../i18n/LocaleContext';
 import { SpiralMark } from './SpiralMark';
 import './ProjectDetail.css';
+
+const text = {
+  en: {
+    close: 'Close project detail',
+    dragHint: '← Drag to see more →',
+    problem: 'Problem',
+    solution: 'Solution',
+    result: 'Result',
+    liveSite: 'Live site ↗',
+    source: 'Source ↗',
+  },
+  ko: {
+    close: '프로젝트 상세 닫기',
+    dragHint: '← 드래그해서 더 보기 →',
+    problem: '문제',
+    solution: '해결',
+    result: '결과',
+    liveSite: '라이브 사이트 ↗',
+    source: '소스 코드 ↗',
+  },
+} as const;
 
 interface ProjectDetailProps {
   project: Project;
@@ -10,6 +32,8 @@ interface ProjectDetailProps {
 }
 
 export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
+  const { locale } = useLocale();
+  const t = text[locale];
   const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,7 +66,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
           className="project-detail-close"
           data-cursor-hover
           onClick={onClose}
-          aria-label="Close project detail"
+          aria-label={t.close}
         >
           ×
         </button>
@@ -67,7 +91,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
         </motion.div>
 
         {project.images.length > 1 && (
-          <span className="project-detail-gallery-hint">← Drag to see more →</span>
+          <span className="project-detail-gallery-hint">{t.dragHint}</span>
         )}
 
         <motion.div
@@ -105,15 +129,15 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
                   </div>
 
                   <div className="project-detail-problem-row">
-                    <span className="project-detail-problem-label">Problem</span>
+                    <span className="project-detail-problem-label">{t.problem}</span>
                     <p>{item.problem}</p>
                   </div>
                   <div className="project-detail-problem-row">
-                    <span className="project-detail-problem-label">Solution</span>
+                    <span className="project-detail-problem-label">{t.solution}</span>
                     <p>{item.solution}</p>
                   </div>
                   <div className="project-detail-problem-row">
-                    <span className="project-detail-problem-label">Result</span>
+                    <span className="project-detail-problem-label">{t.result}</span>
                     <p>{item.result}</p>
                   </div>
 
@@ -143,12 +167,12 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             <div className="project-detail-links">
               {project.liveUrl && (
                 <a href={project.liveUrl} target="_blank" rel="noreferrer" data-cursor-hover>
-                  Live site ↗
+                  {t.liveSite}
                 </a>
               )}
               {project.repoUrl && (
                 <a href={project.repoUrl} target="_blank" rel="noreferrer" data-cursor-hover>
-                  Source ↗
+                  {t.source}
                 </a>
               )}
             </div>

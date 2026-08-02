@@ -6,6 +6,11 @@ import { ProjectCard } from './ProjectCard';
 import { ProjectDetail } from './ProjectDetail';
 import './Projects.css';
 
+const text = {
+  en: { eyebrow: 'Selected work', heading: 'Projects' },
+  ko: { eyebrow: '주요 작업', heading: '프로젝트' },
+} as const;
+
 export function Projects() {
   const { locale } = useLocale();
   const projects = getProjects(locale);
@@ -20,7 +25,7 @@ export function Projects() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.6 }}
       >
-        Selected work
+        {text[locale].eyebrow}
       </motion.p>
 
       <motion.h2
@@ -30,7 +35,7 @@ export function Projects() {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.6 }}
       >
-        Projects
+        {text[locale].heading}
       </motion.h2>
 
       <div className="project-list">
