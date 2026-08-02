@@ -5,21 +5,25 @@ import './Hero.css';
 
 const copy = {
   en: {
-    eyebrow: 'Design → Frontend',
-    titleLine1: 'ONE QUESTION',
-    titleAccent: 'LEADS TO ANOTHER',
+    eyebrow: 'Fine Art → Software',
+    titleLines: [
+      [{ text: 'Hyeji Kim ' }, { text: 'ships', accent: true }],
+      [{ text: 'from concept to App Store.' }],
+    ],
     tagline:
-      "A PM's intent, a user's flow, a teammate's understanding — solving one only opens the next question. I keep that chain moving.",
-    sub: 'A fine arts major turned 3-year frontend developer, still asking why — now exploring better answers in code.',
+      'I studied fine art, where you define the problem yourself and carry it all the way to done. I build products the same way.',
+    sub: 'Conceived and designed an app that won a KSPO award, then rebuilt its backend and shipped to the App Store in two months. React · TypeScript · Flutter. Three years in.',
     scroll: 'Scroll',
   },
   ko: {
-    eyebrow: '디자인 → 프론트엔드',
-    titleLine1: '꼬리를 무는',
-    titleAccent: '질문',
+    eyebrow: '순수예술 → 프론트엔드',
+    titleLines: [
+      [{ text: '기획부터 스토어까지,' }],
+      [{ text: '서비스를 완성하는 개발자 ' }, { text: '김혜지', accent: true }],
+    ],
     tagline:
-      '기획자의 의도, 사용자의 동선, 동료의 이해 — 하나를 풀면 다음 질문이 이어집니다. 저는 그 흐름을 멈추지 않습니다.',
-    sub: '순수예술을 전공했고, 지금은 3년차 프론트엔드 개발자입니다. 여전히 왜냐고 묻고, 이제는 코드로 더 나은 답을 탐구합니다.',
+      '문제를 스스로 정의하고 끝까지 완성해야 하는 순수예술을 전공했습니다. 지금은 같은 방식으로 서비스를 만듭니다.',
+    sub: '직접 기획한 앱으로 국민체육진흥공단(KSPO) 수상, 이후 백엔드를 새로 구축해 2개월 만에 App Store 출시. React · TypeScript · Flutter, 3년차.',
     scroll: '스크롤',
   },
 } as const;
@@ -46,9 +50,19 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          {text.titleLine1}
-          <br />
-          <span className="hero-title-accent">{text.titleAccent}</span>
+          {text.titleLines.map((line, lineIndex) => (
+            <span className="hero-title-line" key={lineIndex}>
+              {line.map((segment, segIndex) =>
+                'accent' in segment && segment.accent ? (
+                  <span className="hero-title-accent" key={segIndex}>
+                    {segment.text}
+                  </span>
+                ) : (
+                  <span key={segIndex}>{segment.text}</span>
+                ),
+              )}
+            </span>
+          ))}
         </motion.h1>
 
         <motion.p
