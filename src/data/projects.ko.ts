@@ -14,6 +14,7 @@ export const projectsKo: Project[] = [
       '기반으로 스마트폰 카메라와 센서만으로 체력을 측정하는 서비스를 만들었습니다. 이 프로젝트로 ' +
       '국민체육진흥공단 공공데이터 경진대회에서 2위를 수상했으며, 현재 iOS 앱스토어에 정식 출시되어 ' +
       '있습니다. 개발 과정에서 마주한 핵심 문제 세 가지와 해결 과정은 아래와 같습니다.',
+    award: '국민체육진흥공단 공공데이터 경진대회 2위',
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
     thumbnail: withBase('1.beeve/beeve_logo.png'),
     images: [

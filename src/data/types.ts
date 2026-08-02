@@ -25,6 +25,7 @@ export interface Project {
   role: string;
   summary: string;
   description: string;
+  award?: string;
   tags: string[];
   thumbnail: string;
   images: ProjectImage[];

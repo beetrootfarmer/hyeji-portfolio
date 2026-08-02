@@ -15,6 +15,7 @@ export const projectsEn: Project[] = [
       "national fitness public dataset. The project won 2nd place at the Korea Sports Promotion " +
       "Foundation's public data competition and has since launched on the iOS App Store. Below are " +
       "three core problems from development and how I solved them.",
+    award: '2nd place, Korea Sports Promotion Foundation public data competition',
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
     thumbnail: withBase('1.beeve/beeve_logo.png'),
     images: [
