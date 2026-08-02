@@ -26,6 +26,7 @@ export interface Project {
   summary: string;
   description: string;
   tags: string[];
+  thumbnail: string;
   images: ProjectImage[];
   problems?: ProjectProblem[];
   code?: ProjectCodeSnippet;

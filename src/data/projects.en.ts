@@ -16,6 +16,7 @@ export const projectsEn: Project[] = [
       "Foundation's public data competition and has since launched on the iOS App Store. Below are " +
       "three core problems from development and how I solved them.",
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
+    thumbnail: withBase('1.beeve/beeve_logo.png'),
     images: [
       { src: withBase('1.beeve/beeve1.jpg'), alt: 'Beeve 6-Data radar score screen' },
       { src: withBase('1.beeve/beeve3.jpg'), alt: 'Beeve AI daily schedule screen' },
@@ -92,6 +93,7 @@ PoseLandmarker.createFromOptions({
       'managing smart farms. From map marker rendering performance to cross-platform shared ' +
       'components, here are four core problems from development and how I solved them.',
     tags: ['Next.js', 'TypeScript', 'Shadcn/CVA', 'App Bridge'],
+    thumbnail: withBase('2.myFarm/myfarm_logo.png'),
     images: [
       { src: withBase('2.myFarm/myfarm1.png'), alt: 'MyFarm+ login screen' },
       { src: withBase('2.myFarm/myfarm2.png'), alt: 'MyFarm+ phone verification screen' },
@@ -156,6 +158,7 @@ PoseLandmarker.createFromOptions({
       'to deployment optimization and a team-wide coding convention, here are three core problems ' +
       'from development and how I solved them.',
     tags: ['Next.js', 'TypeScript', 'Docker', 'CSS'],
+    thumbnail: withBase('3.fandom/fandom_logo.png'),
     images: [
       { src: withBase('3.fandom/fandom1.png'), alt: 'Churrrrr Official news feed screen' },
       { src: withBase('3.fandom/fandom2.png'), alt: 'Dayoff post detail screen' },

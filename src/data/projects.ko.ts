@@ -15,6 +15,7 @@ export const projectsKo: Project[] = [
       '국민체육진흥공단 공공데이터 경진대회에서 2위를 수상했으며, 현재 iOS 앱스토어에 정식 출시되어 ' +
       '있습니다. 개발 과정에서 마주한 핵심 문제 세 가지와 해결 과정은 아래와 같습니다.',
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
+    thumbnail: withBase('1.beeve/beeve_logo.png'),
     images: [
       { src: withBase('1.beeve/beeve1.jpg'), alt: 'Beeve 6-Data 레이더 점수 화면' },
       { src: withBase('1.beeve/beeve3.jpg'), alt: 'Beeve AI 일정 관리 화면' },
@@ -88,6 +89,7 @@ PoseLandmarker.createFromOptions({
       '하이브리드 앱입니다. 지도 마커 렌더링 성능 개선부터 크로스플랫폼 공통 컴포넌트 설계까지, ' +
       '개발 과정에서 마주한 핵심 문제 네 가지와 해결 과정은 아래와 같습니다.',
     tags: ['Next.js', 'TypeScript', 'Shadcn/CVA', 'App Bridge'],
+    thumbnail: withBase('2.myFarm/myfarm_logo.png'),
     images: [
       { src: withBase('2.myFarm/myfarm1.png'), alt: '마이팜플러스 로그인 화면' },
       { src: withBase('2.myFarm/myfarm2.png'), alt: '마이팜플러스 휴대폰 번호 인증 화면' },
@@ -147,6 +149,7 @@ PoseLandmarker.createFromOptions({
       '「Churrrrr」, 「Dayoff」와 어드민 서비스입니다. 실서비스 장애 대응부터 배포 최적화, 팀 코딩 ' +
       '컨벤션 정립까지, 개발 과정에서 마주한 핵심 문제 세 가지와 해결 과정은 아래와 같습니다.',
     tags: ['Next.js', 'TypeScript', 'Docker', 'CSS'],
+    thumbnail: withBase('3.fandom/fandom_logo.png'),
     images: [
       { src: withBase('3.fandom/fandom1.png'), alt: 'Churrrrr Official 뉴스 피드 화면' },
       { src: withBase('3.fandom/fandom2.png'), alt: 'Dayoff 게시물 상세 화면' },

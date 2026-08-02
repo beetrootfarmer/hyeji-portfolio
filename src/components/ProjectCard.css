@@ -17,7 +17,7 @@
 
 .project-card-media {
   grid-row: 1 / 3;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 8px;
 }
@@ -25,7 +25,7 @@
 .project-card-media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.5s ease;
 }
 

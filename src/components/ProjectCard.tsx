@@ -23,9 +23,9 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
     >
       <div className="project-card-media">
         <motion.img
-          src={project.images[0]?.src}
-          alt={project.images[0]?.alt ?? ''}
-          layoutId={`image-${project.slug}`}
+          src={project.thumbnail}
+          alt={`${project.title} logo`}
+          layoutId={`thumbnail-${project.slug}`}
         />
       </div>
       <div className="project-card-meta">
