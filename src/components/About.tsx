@@ -23,17 +23,24 @@ const eyebrow = { en: 'About', ko: '소개' } as const;
 const essays = {
   en: [
     {
-      title: 'Asking Questions, and Being Asked',
+      title: 'Both times, I wrote the spec first',
       paragraphs: [
-        "A habit that carried over from studying art into now. Starting with a question, testing the answer, sitting with the discomfort of not knowing yet, and refusing to settle for the first answer that merely works.",
-        'And the crits — being questioned, and having to explain my own choices — made me slip naturally into code review culture. Just in front of a pull request instead of a canvas.',
+        "FINS, built at Samsung Software Academy For Youth (SSAFY), and Beeve, submitted to a public data competition hosted by KSPO (Korea Sports Promotion Foundation), both started with me deciding what to build. I defined the product, argued why it was needed, designed the screens, and then wrote the code. Both won awards.",
+        "Knowing how something gets built widens what you can plan. The confirm key on a mobile keypad can read Done, or Next, or Search. If you don't know it's customizable, that option never reaches the spec. Because I develop, I can plan down to that level — and because I've planned, I understand the intent behind a screen faster.",
       ],
     },
     {
-      title: 'The Feedback Loop',
+      title: 'The one who wrote most of the code',
       paragraphs: [
-        "Code runs, or it doesn't. It's faster, or it's slower. It holds up, or it breaks. I genuinely enjoy this loop — explore, build, test, learn, rebuild. Not because the uncertainty disappears, but because it turns into something I can actually work with.",
-        "And since there's always more than one good way to build something, I don't think I'll ever get tired of repeating this loop.",
+        'I owned the web side of a fandom app. The frontend team grew to four early on, but by the time we moved into maintenance, I was the only one left.',
+        'That year alone set up everything after it. I restructured the codebase into a monorepo so a second app could ship on top of it, and when new engineers joined, I set the direction for the frontend code and onboarded them — because I was the only one who knew all of it.',
+      ],
+    },
+    {
+      title: 'While 100,000 people were using it',
+      paragraphs: [
+        "Both apps passed 100,000 downloads. Our users weren't only in Korea, so we supported four languages — Korean, English, Japanese, and Chinese. I introduced i18n and managed the translation files myself.",
+        'There was no QA team. We defined a support matrix and shipped after covering as many edge cases and device conditions as we could, but things still slipped through — so how fast we responded mattered. When a ticket came in, I traced the cause across device, OS, and browser, then built a fallback or rewrote it with compatible syntax.',
       ],
     },
   ],
