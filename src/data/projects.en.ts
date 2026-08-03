@@ -83,6 +83,60 @@ PoseLandmarker.createFromOptions({
     repoUrl: '',
   },
   {
+    slug: 'fandom',
+    year: '2024',
+    title: 'Churrrrr · Dayoff',
+    role: 'Frontend',
+    summary:
+      'Fandom community apps "Churrrrr" and "Dayoff" plus an admin service — from an iOS 16 rendering bug to a 75% Docker image cut.',
+    description:
+      'Built at Genesis Nest as a frontend engineer between April 2024 and April 2025: the fandom ' +
+      'community apps "Churrrrr" and "Dayoff", plus their admin service. From a live-service incident ' +
+      'to deployment optimization and a team-wide coding convention, here are three core problems ' +
+      'from development and how I solved them.',
+    tags: ['Next.js', 'TypeScript', 'Docker', 'CSS'],
+    thumbnail: withBase('3.fandom/fandom_logo.png'),
+    images: [
+      { src: withBase('3.fandom/fandom1.png'), alt: 'Churrrrr Official news feed screen' },
+      { src: withBase('3.fandom/fandom2.png'), alt: 'Dayoff post detail screen' },
+      { src: withBase('3.fandom/fandom3.png'), alt: 'Dayoff FAQ screen' },
+      { src: withBase('3.fandom/fandom4.png'), alt: 'Churrrrr post detail screen' },
+      { src: withBase('3.fandom/fandom5.png'), alt: 'Churrrrr FAQ screen' },
+    ],
+    problems: [
+      {
+        title: 'iOS 16 CSS Nesting compatibility bug',
+        problem:
+          'A live-service incident: SVG icons rendered at the wrong size, but only in staging and only ' +
+          'on specific iOS 16 devices. It wasn\'t reproducible locally, so I had to dig through WebKit ' +
+          "spec docs and Safari release notes directly.",
+        solution:
+          'Found that CSS Nesting support landed in iOS 16.5 but still wasn\'t fully applied in 16.6, ' +
+          'and split the nested selectors into independent selectors per class.',
+        result: 'UI rendered consistently across every iOS device.',
+      },
+      {
+        title: 'Docker image optimization',
+        problem:
+          'The deployed Docker image had ballooned to 273MB, slowing down builds and deploys. I ' +
+          'compared a multi-stage build against Next.js\'s standalone output option.',
+        solution: 'Adopted Next.js standalone mode.',
+        result: 'Cut the image from 273MB to 68MB (75%) and shortened deploy times.',
+      },
+      {
+        title: 'TypeScript enum to union types',
+        problem:
+          "enum wasn't tree-shakeable, so unused code kept shipping in the bundle, and numeric enums " +
+          "were weak on type safety too. I reviewed the tradeoffs with the team against a range of " +
+          "references and other teams' conventions.",
+        solution: 'Standardized on union types + as const as the team convention.',
+        result: 'Smaller bundles, stronger type safety, and better code quality across the team.',
+      },
+    ],
+    liveUrl: '',
+    repoUrl: '',
+  },
+  {
     slug: 'myfarm',
     year: '2025',
     title: 'MyFarm+',
@@ -141,60 +195,6 @@ PoseLandmarker.createFromOptions({
           'platform.',
         solution: 'Built a 33-component shared library, cutting duplicate code by roughly 40%.',
         result: 'A reusable component library that works across both the app and the web.',
-      },
-    ],
-    liveUrl: '',
-    repoUrl: '',
-  },
-  {
-    slug: 'fandom',
-    year: '2024',
-    title: 'Churrrrr · Dayoff',
-    role: 'Frontend',
-    summary:
-      'Fandom community apps "Churrrrr" and "Dayoff" plus an admin service — from an iOS 16 rendering bug to a 75% Docker image cut.',
-    description:
-      'Built at Genesis Nest as a frontend engineer between April 2024 and April 2025: the fandom ' +
-      'community apps "Churrrrr" and "Dayoff", plus their admin service. From a live-service incident ' +
-      'to deployment optimization and a team-wide coding convention, here are three core problems ' +
-      'from development and how I solved them.',
-    tags: ['Next.js', 'TypeScript', 'Docker', 'CSS'],
-    thumbnail: withBase('3.fandom/fandom_logo.png'),
-    images: [
-      { src: withBase('3.fandom/fandom1.png'), alt: 'Churrrrr Official news feed screen' },
-      { src: withBase('3.fandom/fandom2.png'), alt: 'Dayoff post detail screen' },
-      { src: withBase('3.fandom/fandom3.png'), alt: 'Dayoff FAQ screen' },
-      { src: withBase('3.fandom/fandom4.png'), alt: 'Churrrrr post detail screen' },
-      { src: withBase('3.fandom/fandom5.png'), alt: 'Churrrrr FAQ screen' },
-    ],
-    problems: [
-      {
-        title: 'iOS 16 CSS Nesting compatibility bug',
-        problem:
-          'A live-service incident: SVG icons rendered at the wrong size, but only in staging and only ' +
-          'on specific iOS 16 devices. It wasn\'t reproducible locally, so I had to dig through WebKit ' +
-          "spec docs and Safari release notes directly.",
-        solution:
-          'Found that CSS Nesting support landed in iOS 16.5 but still wasn\'t fully applied in 16.6, ' +
-          'and split the nested selectors into independent selectors per class.',
-        result: 'UI rendered consistently across every iOS device.',
-      },
-      {
-        title: 'Docker image optimization',
-        problem:
-          'The deployed Docker image had ballooned to 273MB, slowing down builds and deploys. I ' +
-          'compared a multi-stage build against Next.js\'s standalone output option.',
-        solution: 'Adopted Next.js standalone mode.',
-        result: 'Cut the image from 273MB to 68MB (75%) and shortened deploy times.',
-      },
-      {
-        title: 'TypeScript enum to union types',
-        problem:
-          "enum wasn't tree-shakeable, so unused code kept shipping in the bundle, and numeric enums " +
-          "were weak on type safety too. I reviewed the tradeoffs with the team against a range of " +
-          "references and other teams' conventions.",
-        solution: 'Standardized on union types + as const as the team convention.',
-        result: 'Smaller bundles, stronger type safety, and better code quality across the team.',
       },
     ],
     liveUrl: '',

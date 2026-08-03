@@ -79,6 +79,58 @@ PoseLandmarker.createFromOptions({
     repoUrl: '',
   },
   {
+    slug: 'fandom',
+    year: '2024',
+    title: 'Churrrrr · Dayoff',
+    role: 'Frontend',
+    summary:
+      '팬덤 커뮤니티 앱 「Churrrrr」·「Dayoff」와 어드민 서비스 개발. iOS 16 렌더링 버그 대응부터 Docker 이미지 75% 감축까지.',
+    description:
+      '2024년 4월부터 2025년 4월까지 제네시스네스트에서 프론트엔드로 참여해 만든 팬덤 커뮤니티 앱 ' +
+      '「Churrrrr」, 「Dayoff」와 어드민 서비스입니다. 실서비스 장애 대응부터 배포 최적화, 팀 코딩 ' +
+      '컨벤션 정립까지, 개발 과정에서 마주한 핵심 문제 세 가지와 해결 과정은 아래와 같습니다.',
+    tags: ['Next.js', 'TypeScript', 'Docker', 'CSS'],
+    thumbnail: withBase('3.fandom/fandom_logo.png'),
+    images: [
+      { src: withBase('3.fandom/fandom1.png'), alt: 'Churrrrr Official 뉴스 피드 화면' },
+      { src: withBase('3.fandom/fandom2.png'), alt: 'Dayoff 게시물 상세 화면' },
+      { src: withBase('3.fandom/fandom3.png'), alt: 'Dayoff 자주 묻는 질문 화면' },
+      { src: withBase('3.fandom/fandom4.png'), alt: 'Churrrrr 게시물 상세 화면' },
+      { src: withBase('3.fandom/fandom5.png'), alt: 'Churrrrr 자주 묻는 질문 화면' },
+    ],
+    problems: [
+      {
+        title: 'iOS 16 CSS Nesting 호환성 버그 해결',
+        problem:
+          '스테이징 환경에서만, 그것도 특정 iOS 16 기기에서 SVG 아이콘 크기가 비정상적으로 표시되는 ' +
+          '실서비스 장애가 발생했습니다. 로컬에서는 재현이 안 돼 웹킷 표준 문서와 Safari 릴리스 노트를 ' +
+          '직접 추적해야 했습니다.',
+        solution:
+          'CSS Nesting이 iOS 16.5에서 지원되기 시작했지만 16.6에서도 완전히 적용되지는 않는다는 것을 ' +
+          '확인하고, 중첩 선택자를 각 클래스별 독립 선택자로 분리했습니다.',
+        result: '전 iOS 기기에서 일관된 UI 렌더링을 확보했습니다.',
+      },
+      {
+        title: 'Docker 이미지 최적화',
+        problem:
+          '배포 시 Docker 이미지 크기가 273MB에 달해 빌드·배포 시간과 용량 문제가 있었습니다. ' +
+          'multi-stage build와 Next.js standalone 옵션을 비교 검토했습니다.',
+        solution: 'Next.js standalone 모드를 적용했습니다.',
+        result: '이미지 크기를 273MB에서 68MB로 75% 줄이고, 배포 시간도 단축했습니다.',
+      },
+      {
+        title: 'TypeScript enum → Union 타입 전환',
+        problem:
+          'enum은 트리 셰이킹이 되지 않아 사용하지 않는 코드까지 번들에 포함됐고, 숫자형 enum은 타입 ' +
+          '안정성도 떨어졌습니다. 다양한 레퍼런스와 다른 팀 사례를 팀원들과 함께 검토했습니다.',
+        solution: 'Union 타입 + as const 조합으로 패턴을 정리해 팀 표준으로 약속했습니다.',
+        result: '번들 최적화와 타입 안정성이 향상되고, 팀 전체 코드 품질이 개선됐습니다.',
+      },
+    ],
+    liveUrl: '',
+    repoUrl: '',
+  },
+  {
     slug: 'myfarm',
     year: '2025',
     title: '마이팜플러스',
@@ -133,58 +185,6 @@ PoseLandmarker.createFromOptions({
           '플랫폼과 무관하게 동작하는 컴포넌트 설계를 검토했습니다.',
         solution: '33개 공통 컴포넌트를 개발해 중복 코드를 약 40% 감소시켰습니다.',
         result: '앱·웹 양쪽에서 재사용 가능한 컴포넌트 라이브러리를 구축했습니다.',
-      },
-    ],
-    liveUrl: '',
-    repoUrl: '',
-  },
-  {
-    slug: 'fandom',
-    year: '2024',
-    title: 'Churrrrr · Dayoff',
-    role: 'Frontend',
-    summary:
-      '팬덤 커뮤니티 앱 「Churrrrr」·「Dayoff」와 어드민 서비스 개발. iOS 16 렌더링 버그 대응부터 Docker 이미지 75% 감축까지.',
-    description:
-      '2024년 4월부터 2025년 4월까지 제네시스네스트에서 프론트엔드로 참여해 만든 팬덤 커뮤니티 앱 ' +
-      '「Churrrrr」, 「Dayoff」와 어드민 서비스입니다. 실서비스 장애 대응부터 배포 최적화, 팀 코딩 ' +
-      '컨벤션 정립까지, 개발 과정에서 마주한 핵심 문제 세 가지와 해결 과정은 아래와 같습니다.',
-    tags: ['Next.js', 'TypeScript', 'Docker', 'CSS'],
-    thumbnail: withBase('3.fandom/fandom_logo.png'),
-    images: [
-      { src: withBase('3.fandom/fandom1.png'), alt: 'Churrrrr Official 뉴스 피드 화면' },
-      { src: withBase('3.fandom/fandom2.png'), alt: 'Dayoff 게시물 상세 화면' },
-      { src: withBase('3.fandom/fandom3.png'), alt: 'Dayoff 자주 묻는 질문 화면' },
-      { src: withBase('3.fandom/fandom4.png'), alt: 'Churrrrr 게시물 상세 화면' },
-      { src: withBase('3.fandom/fandom5.png'), alt: 'Churrrrr 자주 묻는 질문 화면' },
-    ],
-    problems: [
-      {
-        title: 'iOS 16 CSS Nesting 호환성 버그 해결',
-        problem:
-          '스테이징 환경에서만, 그것도 특정 iOS 16 기기에서 SVG 아이콘 크기가 비정상적으로 표시되는 ' +
-          '실서비스 장애가 발생했습니다. 로컬에서는 재현이 안 돼 웹킷 표준 문서와 Safari 릴리스 노트를 ' +
-          '직접 추적해야 했습니다.',
-        solution:
-          'CSS Nesting이 iOS 16.5에서 지원되기 시작했지만 16.6에서도 완전히 적용되지는 않는다는 것을 ' +
-          '확인하고, 중첩 선택자를 각 클래스별 독립 선택자로 분리했습니다.',
-        result: '전 iOS 기기에서 일관된 UI 렌더링을 확보했습니다.',
-      },
-      {
-        title: 'Docker 이미지 최적화',
-        problem:
-          '배포 시 Docker 이미지 크기가 273MB에 달해 빌드·배포 시간과 용량 문제가 있었습니다. ' +
-          'multi-stage build와 Next.js standalone 옵션을 비교 검토했습니다.',
-        solution: 'Next.js standalone 모드를 적용했습니다.',
-        result: '이미지 크기를 273MB에서 68MB로 75% 줄이고, 배포 시간도 단축했습니다.',
-      },
-      {
-        title: 'TypeScript enum → Union 타입 전환',
-        problem:
-          'enum은 트리 셰이킹이 되지 않아 사용하지 않는 코드까지 번들에 포함됐고, 숫자형 enum은 타입 ' +
-          '안정성도 떨어졌습니다. 다양한 레퍼런스와 다른 팀 사례를 팀원들과 함께 검토했습니다.',
-        solution: 'Union 타입 + as const 조합으로 패턴을 정리해 팀 표준으로 약속했습니다.',
-        result: '번들 최적화와 타입 안정성이 향상되고, 팀 전체 코드 품질이 개선됐습니다.',
       },
     ],
     liveUrl: '',
