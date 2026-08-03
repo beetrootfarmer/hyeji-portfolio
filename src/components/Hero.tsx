@@ -12,7 +12,7 @@ const copy = {
     ],
     tagline:
       'I studied fine art, where you define the problem yourself and carry it all the way to done. I build products the same way.',
-    sub: 'Conceived and designed an app that won a KSPO award, then rebuilt its backend and shipped to the App Store in two months. React · TypeScript · Flutter. Three years in.',
+    sub: 'Conceived and designed an app that won a KSPO award, then rebuilt its backend and shipped to the App Store in two months. React · TypeScript. Three years in.',
     scroll: 'Scroll',
   },
   ko: {
@@ -23,7 +23,7 @@ const copy = {
     ],
     tagline:
       '문제를 스스로 정의하고 끝까지 완성해야 하는 순수예술을 전공했습니다. 지금은 같은 방식으로 서비스를 만듭니다.',
-    sub: '직접 기획한 앱으로 국민체육진흥공단(KSPO) 수상, 이후 백엔드를 새로 구축해 2개월 만에 App Store 출시. React · TypeScript · Flutter, 3년차.',
+    sub: '직접 기획한 앱으로 국민체육진흥공단(KSPO) 수상, 이후 백엔드를 새로 구축해 2개월 만에 App Store 출시. React · TypeScript, 3년차.',
     scroll: '스크롤',
   },
 } as const;
