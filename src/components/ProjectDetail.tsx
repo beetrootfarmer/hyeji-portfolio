@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import type { Project } from '../data/types';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import type { Project, ProjectImage } from '../data/types';
 import { useLocale } from '../i18n/LocaleContext';
 import { SpiralMark } from './SpiralMark';
 import './ProjectDetail.css';
@@ -14,6 +14,7 @@ const text = {
     result: 'Result',
     liveSite: 'Live site ↗',
     source: 'Source ↗',
+    closeZoom: 'Close zoomed image',
   },
   ko: {
     close: '프로젝트 상세 닫기',
@@ -23,6 +24,7 @@ const text = {
     result: '결과',
     liveSite: '라이브 사이트 ↗',
     source: '소스 코드 ↗',
+    closeZoom: '확대 이미지 닫기',
   },
 } as const;
 
@@ -35,10 +37,16 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
   const { locale } = useLocale();
   const t = text[locale];
   const galleryRef = useRef<HTMLDivElement>(null);
+  const [zoomedImage, setZoomedImage] = useState<ProjectImage | null>(null);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
+      if (event.key !== 'Escape') return;
+      if (zoomedImage) {
+        setZoomedImage(null);
+      } else {
+        onClose();
+      }
     };
     document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', handleKey);
@@ -46,7 +54,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKey);
     };
-  }, [onClose]);
+  }, [onClose, zoomedImage]);
 
   return (
     <motion.div
@@ -85,6 +93,8 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
                 alt={image.alt}
                 draggable={false}
                 layoutId={index === 0 ? `image-${project.slug}` : undefined}
+                onClick={() => setZoomedImage(image)}
+                data-cursor-hover
               />
             ))}
           </motion.div>
@@ -178,6 +188,41 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             </div>
           )}
         </motion.div>
+
+        <AnimatePresence>
+          {zoomedImage && (
+            <motion.div
+              className="project-detail-zoom"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setZoomedImage(null)}
+            >
+              <button
+                type="button"
+                className="project-detail-zoom-close"
+                data-cursor-hover
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setZoomedImage(null);
+                }}
+                aria-label={t.closeZoom}
+              >
+                ×
+              </button>
+              <motion.img
+                src={zoomedImage.src}
+                alt={zoomedImage.alt}
+                initial={{ scale: 0.94 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.96 }}
+                transition={{ duration: 0.2 }}
+                data-cursor-hover
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     </motion.div>
   );
