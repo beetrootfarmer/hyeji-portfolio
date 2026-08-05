@@ -33,7 +33,6 @@
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 1.25rem;
-  max-width: 68ch;
   align-items: start;
 }
 
@@ -90,6 +89,12 @@
 
 .experience-job-points li::marker {
   color: var(--accent);
+}
+
+@media (min-width: 861px) {
+  .experience-job-points li {
+    white-space: nowrap;
+  }
 }
 
 .experience-gap {

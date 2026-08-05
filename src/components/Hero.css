@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100svh;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 13fr 7fr;
   align-items: center;
   gap: clamp(2rem, 6vw, 6rem);
   width: min(1200px, 92vw);
@@ -36,12 +36,12 @@
 }
 
 .hero-tagline {
-  max-width: 38ch;
+  max-width: 44ch;
   font-size: clamp(calc(1.1rem - 2px), 1.8vw, calc(1.4rem - 2px));
   font-weight: 600;
   color: var(--fg);
   line-height: 1.4;
-  min-height: calc(4 * 1.4em);
+  min-height: calc(3 * 1.4em);
 }
 
 .hero-tagline-line {
@@ -53,13 +53,13 @@
   font-size: clamp(1rem, 1.4vw, 1.15rem);
   color: var(--fg-dim);
   line-height: 1.5;
-  min-height: calc(4 * 1.5em);
+  min-height: calc(2 * 1.5em);
 }
 
 .hero-figure {
   position: relative;
   aspect-ratio: 1;
-  width: min(100%, 420px);
+  width: min(100%, 320px);
   justify-self: center;
 }
 
@@ -67,12 +67,13 @@
   position: absolute;
   right: 3%;
   bottom: 5%;
-  max-width: 44%;
+  max-width: 70%;
   font-family: var(--font-mono);
   font-size: clamp(0.72rem, 1vw, 0.85rem);
   line-height: 1.4;
   color: var(--fg-dim);
   text-align: right;
+  word-break: keep-all;
 }
 
 .scroll-cue {
@@ -97,6 +98,12 @@
   transform-origin: top;
 }
 
+@media (min-width: 861px) {
+  .hero-title-line-nowrap-wide {
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 860px) {
   .hero {
     grid-template-columns: 1fr;
@@ -104,6 +111,6 @@
   }
 
   .hero-figure {
-    width: min(100%, 280px);
+    width: min(100%, 240px);
   }
 }

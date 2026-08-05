@@ -9,9 +9,15 @@ interface TextSegment {
 }
 type LineSegment = TextSegment | TextSegment[];
 
+interface TitleLine {
+  segments: LineSegment[];
+  /** Keep this line on a single row once the viewport is wide enough. */
+  nowrapWide?: boolean;
+}
+
 interface HeroCopy {
   eyebrow: string;
-  titleLines: LineSegment[][];
+  titleLines: TitleLine[];
   tagline: string[];
   sub: string;
   spiralLabel: string;
@@ -23,16 +29,15 @@ const copy: Record<'en' | 'ko', HeroCopy> = {
   en: {
     eyebrow: 'Fine Art → Software',
     titleLines: [
-      [{ text: 'Hyeji Kim ' }, { text: 'ships', accent: true }],
-      [{ text: 'from concept to App Store.' }],
+      { segments: [{ text: 'Hyeji Kim ' }, { text: 'ships', accent: true }] },
+      { segments: [{ text: 'from concept to App Store.' }] },
     ],
     tagline: [
       'Conceived and designed an app that won a KSPO award,',
       'then rebuilt its backend and shipped to the App Store in two months.',
       'Ran the web side of two fandom apps with 100K+ downloads across four languages.',
-      'React · TypeScript · Next.js. Three years in.',
     ],
-    sub: 'I studied fine art, where you define the problem yourself and carry it all the way to done. I build products the same way.',
+    sub: 'React · TypeScript · Next.js. Three years in.',
     spiralLabel: 'A graphic of an infinitely expanding spiral, representing entropy.',
     spiralCaption: 'An infinitely expanding spiral — entropy',
     scroll: 'Scroll',
@@ -40,16 +45,18 @@ const copy: Record<'en' | 'ko', HeroCopy> = {
   ko: {
     eyebrow: '순수예술 → 프론트엔드',
     titleLines: [
-      [{ text: '기획부터 스토어까지,' }],
-      [{ text: '서비스를 완성하는 ' }, [{ text: '개발자 ' }, { text: '김혜지', accent: true }]],
+      { segments: [{ text: '기획부터 스토어까지,' }] },
+      {
+        segments: [{ text: '서비스를 완성하는 ' }, [{ text: '개발자 ' }, { text: '김혜지', accent: true }]],
+        nowrapWide: true,
+      },
     ],
     tagline: [
       '직접 기획한 앱으로 국민체육진흥공단(KSPO) 수상,',
       '백엔드를 새로 구축해 2개월 만에 App Store 출시.',
       '누적 10만 다운로드 팬덤 앱 2종의 웹을 4개 국어로 운영.',
-      'React · TypeScript · Next.js, 3년차.',
     ],
-    sub: '문제를 스스로 정의하고 끝까지 완성해야 하는 순수예술을 전공했습니다. 지금은 같은 방식으로 서비스를 만듭니다.',
+    sub: 'React · TypeScript · Next.js, 3년차.',
     spiralLabel: '무한히 확장하는 나선, 엔트로피를 형상화한 그래픽',
     spiralCaption: '무한히 확장하는 나선 — 엔트로피',
     scroll: '스크롤',
@@ -79,8 +86,13 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
         >
           {text.titleLines.map((line, lineIndex) => (
-            <span className="hero-title-line" key={lineIndex}>
-              {line.map((segment, segIndex) =>
+            <span
+              className={
+                line.nowrapWide ? 'hero-title-line hero-title-line-nowrap-wide' : 'hero-title-line'
+              }
+              key={lineIndex}
+            >
+              {line.segments.map((segment, segIndex) =>
                 Array.isArray(segment) ? (
                   <span className="hero-title-nowrap" key={segIndex}>
                     {segment.map((subSegment, subIndex) =>
