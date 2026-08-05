@@ -3,12 +3,14 @@ import { buildSpiralPath } from '../lib/spiral';
 import './SpiralHero.css';
 
 interface SpiralHeroProps {
+  label: string;
   baseScale?: number;
   maxScale?: number;
   rotationSeconds?: number;
 }
 
 export function SpiralHero({
+  label,
   baseScale = 1,
   maxScale = 1.15,
   rotationSeconds = 15,
@@ -36,9 +38,9 @@ export function SpiralHero({
   }, [baseScale, maxScale]);
 
   return (
-    <div ref={wrapRef} className="spiral-hero" aria-hidden="true">
+    <div ref={wrapRef} className="spiral-hero">
       <div className="spiral-rotor" style={{ animationDuration: `${rotationSeconds}s` }}>
-        <svg viewBox="0 0 600 600" width="100%" height="100%">
+        <svg viewBox="0 0 600 600" width="100%" height="100%" role="img" aria-label={label}>
           <defs>
             <linearGradient id="spiral-fade" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="var(--accent)" stopOpacity="1" />

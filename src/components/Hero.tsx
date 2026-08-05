@@ -12,8 +12,10 @@ type LineSegment = TextSegment | TextSegment[];
 interface HeroCopy {
   eyebrow: string;
   titleLines: LineSegment[][];
-  tagline: string;
+  tagline: string[];
   sub: string;
+  spiralLabel: string;
+  spiralCaption: string;
   scroll: string;
 }
 
@@ -24,9 +26,15 @@ const copy: Record<'en' | 'ko', HeroCopy> = {
       [{ text: 'Hyeji Kim ' }, { text: 'ships', accent: true }],
       [{ text: 'from concept to App Store.' }],
     ],
-    tagline:
-      'Conceived and designed an app that won a KSPO award, then rebuilt its backend and shipped to the App Store in two months. Ran the web side of two fandom apps with 100K+ downloads across four languages. React · TypeScript · Next.js. Three years in.',
+    tagline: [
+      'Conceived and designed an app that won a KSPO award,',
+      'then rebuilt its backend and shipped to the App Store in two months.',
+      'Ran the web side of two fandom apps with 100K+ downloads across four languages.',
+      'React · TypeScript · Next.js. Three years in.',
+    ],
     sub: 'I studied fine art, where you define the problem yourself and carry it all the way to done. I build products the same way.',
+    spiralLabel: 'A graphic of an infinitely expanding spiral, representing entropy.',
+    spiralCaption: 'An infinitely expanding spiral — entropy',
     scroll: 'Scroll',
   },
   ko: {
@@ -35,9 +43,15 @@ const copy: Record<'en' | 'ko', HeroCopy> = {
       [{ text: '기획부터 스토어까지,' }],
       [{ text: '서비스를 완성하는 ' }, [{ text: '개발자 ' }, { text: '김혜지', accent: true }]],
     ],
-    tagline:
-      '직접 기획한 앱으로 국민체육진흥공단(KSPO) 수상, 백엔드를 새로 구축해 2개월 만에 App Store 출시. 누적 10만 다운로드 팬덤 앱 2종의 웹을 4개 국어로 운영. React · TypeScript · Next.js, 3년차.',
+    tagline: [
+      '직접 기획한 앱으로 국민체육진흥공단(KSPO) 수상,',
+      '백엔드를 새로 구축해 2개월 만에 App Store 출시.',
+      '누적 10만 다운로드 팬덤 앱 2종의 웹을 4개 국어로 운영.',
+      'React · TypeScript · Next.js, 3년차.',
+    ],
     sub: '문제를 스스로 정의하고 끝까지 완성해야 하는 순수예술을 전공했습니다. 지금은 같은 방식으로 서비스를 만듭니다.',
+    spiralLabel: '무한히 확장하는 나선, 엔트로피를 형상화한 그래픽',
+    spiralCaption: '무한히 확장하는 나선 — 엔트로피',
     scroll: '스크롤',
   },
 };
@@ -97,7 +111,11 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          {text.tagline}
+          {text.tagline.map((line, index) => (
+            <span className="hero-tagline-line" key={index}>
+              {line}
+            </span>
+          ))}
         </motion.p>
 
         <motion.p
@@ -115,9 +133,11 @@ export function Hero() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        aria-hidden="true"
       >
-        <SpiralHero />
+        <SpiralHero label={text.spiralLabel} />
+        <span className="hero-figure-caption" aria-hidden="true">
+          {text.spiralCaption}
+        </span>
       </motion.div>
 
       <motion.div
