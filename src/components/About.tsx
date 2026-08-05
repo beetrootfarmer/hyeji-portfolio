@@ -5,16 +5,16 @@ import './About.css';
 
 const facts = {
   en: [
-    { label: 'Background', value: 'B.A. in Fine Arts, Gachon University' },
-    { label: 'Now', value: 'Frontend Developer' },
-    { label: 'Tools', value: 'React · TypeScript · Figma' },
-    { label: 'Based in', value: 'Seoul, KR' },
+    { label: 'Tools', value: 'React · TypeScript · Next.js' },
+    { label: 'Certifications', value: 'Information Processing Engineer · SQLD' },
+    { label: 'Awards', value: '2nd place, KSPO Public Data Competition · SSAFY Project Excellence Award' },
+    { label: 'Languages', value: 'English (TOEIC 950, OPIc IH)' },
   ],
   ko: [
-    { label: '배경', value: '가천대학교 미술디자인학부 학사' },
-    { label: '현재', value: '프론트엔드 개발자' },
-    { label: '도구', value: 'React · TypeScript · Figma' },
-    { label: '거주지', value: '서울, 대한민국' },
+    { label: '도구', value: 'React · TypeScript · Next.js' },
+    { label: '자격', value: '정보처리기사 · SQLD' },
+    { label: '수상', value: '국민체육진흥공단 공공데이터 공모전 2위 · SSAFY 프로젝트 우수상' },
+    { label: '언어', value: '영어 (TOEIC 950, OPIc IH)' },
   ],
 } as const;
 

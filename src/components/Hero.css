@@ -31,6 +31,10 @@
   -webkit-text-stroke: 1px var(--accent);
 }
 
+.hero-title-nowrap {
+  white-space: nowrap;
+}
+
 .hero-tagline {
   max-width: 38ch;
   font-size: clamp(1.1rem, 1.8vw, 1.4rem);

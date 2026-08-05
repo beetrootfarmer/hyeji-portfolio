@@ -3,7 +3,21 @@ import { useLocale } from '../i18n/LocaleContext';
 import { SpiralHero } from './SpiralHero';
 import './Hero.css';
 
-const copy = {
+interface TextSegment {
+  text: string;
+  accent?: boolean;
+}
+type LineSegment = TextSegment | TextSegment[];
+
+interface HeroCopy {
+  eyebrow: string;
+  titleLines: LineSegment[][];
+  tagline: string;
+  sub: string;
+  scroll: string;
+}
+
+const copy: Record<'en' | 'ko', HeroCopy> = {
   en: {
     eyebrow: 'Fine Art → Software',
     titleLines: [
@@ -11,22 +25,22 @@ const copy = {
       [{ text: 'from concept to App Store.' }],
     ],
     tagline:
-      'I studied fine art, where you define the problem yourself and carry it all the way to done. I build products the same way.',
-    sub: 'Conceived and designed an app that won a KSPO award, then rebuilt its backend and shipped to the App Store in two months. React · TypeScript. Three years in.',
+      'Conceived and designed an app that won a KSPO award, then rebuilt its backend and shipped to the App Store in two months. Ran the web side of two fandom apps with 100K+ downloads across four languages. React · TypeScript · Next.js. Three years in.',
+    sub: 'I studied fine art, where you define the problem yourself and carry it all the way to done. I build products the same way.',
     scroll: 'Scroll',
   },
   ko: {
     eyebrow: '순수예술 → 프론트엔드',
     titleLines: [
       [{ text: '기획부터 스토어까지,' }],
-      [{ text: '서비스를 완성하는 개발자 ' }, { text: '김혜지', accent: true }],
+      [{ text: '서비스를 완성하는 ' }, [{ text: '개발자 ' }, { text: '김혜지', accent: true }]],
     ],
     tagline:
-      '문제를 스스로 정의하고 끝까지 완성해야 하는 순수예술을 전공했습니다. 지금은 같은 방식으로 서비스를 만듭니다.',
-    sub: '직접 기획한 앱으로 국민체육진흥공단(KSPO) 수상, 이후 백엔드를 새로 구축해 2개월 만에 App Store 출시. React · TypeScript, 3년차.',
+      '직접 기획한 앱으로 국민체육진흥공단(KSPO) 수상, 백엔드를 새로 구축해 2개월 만에 App Store 출시. 누적 10만 다운로드 팬덤 앱 2종의 웹을 4개 국어로 운영. React · TypeScript · Next.js, 3년차.',
+    sub: '문제를 스스로 정의하고 끝까지 완성해야 하는 순수예술을 전공했습니다. 지금은 같은 방식으로 서비스를 만듭니다.',
     scroll: '스크롤',
   },
-} as const;
+};
 
 export function Hero() {
   const { locale } = useLocale();
@@ -53,7 +67,19 @@ export function Hero() {
           {text.titleLines.map((line, lineIndex) => (
             <span className="hero-title-line" key={lineIndex}>
               {line.map((segment, segIndex) =>
-                'accent' in segment && segment.accent ? (
+                Array.isArray(segment) ? (
+                  <span className="hero-title-nowrap" key={segIndex}>
+                    {segment.map((subSegment, subIndex) =>
+                      subSegment.accent ? (
+                        <span className="hero-title-accent" key={subIndex}>
+                          {subSegment.text}
+                        </span>
+                      ) : (
+                        <span key={subIndex}>{subSegment.text}</span>
+                      ),
+                    )}
+                  </span>
+                ) : segment.accent ? (
                   <span className="hero-title-accent" key={segIndex}>
                     {segment.text}
                   </span>
