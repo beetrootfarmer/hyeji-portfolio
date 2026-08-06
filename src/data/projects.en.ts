@@ -225,4 +225,55 @@ PoseLandmarker.createFromOptions({
     repoUrl: '',
     more: true,
   },
+  {
+    slug: 'tify',
+    year: '2023',
+    title: 'TIFY',
+    role: 'PM & Frontend Lead',
+    summary:
+      'A gift-funding service where you get celebrated by crowdfunding the gift you want. PM and Frontend Lead at Samsung Software Academy For Youth (SSAFY) — built a Firebase notification system and S3 image storage.',
+    description:
+      'Built between January and February 2023 at Samsung Software Academy For Youth (SSAFY) as PM ' +
+      'and Frontend Lead: TIFY (This Is For You), a service where you get celebrated by crowdfunding ' +
+      'the gift you actually want. Implemented a NoSQL notification service with Firebase, optimized ' +
+      'the UI at the component level — forms, buttons, page labels — and set up an S3 bucket for ' +
+      'image storage backed by a separate database.',
+    tags: ['Firebase', 'AWS S3'],
+    thumbnail: withBase('5.tify/logo.svg'),
+    images: [
+      { src: withBase('5.tify/tify1.png'), alt: 'TIFY sign-up screen' },
+      { src: withBase('5.tify/tify2.png'), alt: 'TIFY gift-funding screen' },
+      { src: withBase('5.tify/tify3.png'), alt: 'TIFY thank-you card screen' },
+      { src: withBase('5.tify/tify4.png'), alt: 'TIFY occasion history and card archive screen' },
+    ],
+    liveUrl: '',
+    repoUrl: '',
+    more: true,
+  },
+  {
+    slug: 'fins',
+    year: '2022',
+    title: 'FINS',
+    role: 'PM & Frontend',
+    summary:
+      'A personal movie SNS service built around your favorite films. Won the Project Excellence Award (presented by Samsung Electronics) at SSAFY.',
+    description:
+      'Built in November 2022 at Samsung Software Academy For Youth (SSAFY): a personal movie SNS ' +
+      'service built around your favorite films. Randomly displayed thumbnails from a pool of roughly ' +
+      '14,000 movies, and implemented infinite scroll with the Intersection Observer API. Web-crawled ' +
+      'movie data with Python and Pandas, built the frontend with Vue.js, JavaScript, and Vite, and ' +
+      'the backend with Python, Django, and SQLite.',
+    award: 'Project Excellence Award (Samsung Electronics)',
+    tags: ['Vue.js', 'JavaScript', 'Vite', 'Python', 'Django', 'SQLite'],
+    thumbnail: withBase('6.fins/logo.png'),
+    images: [
+      { src: withBase('6.fins/fins1.png'), alt: 'FINS login/sign-up screen' },
+      { src: withBase('6.fins/fins2.png'), alt: 'FINS movie grid screen' },
+      { src: withBase('6.fins/fins3.png'), alt: 'FINS Finder (swipe) screen' },
+      { src: withBase('6.fins/fins4.png'), alt: 'FINS my page screen' },
+    ],
+    liveUrl: '',
+    repoUrl: '',
+    more: true,
+  },
 ];

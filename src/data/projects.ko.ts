@@ -214,4 +214,53 @@ PoseLandmarker.createFromOptions({
     repoUrl: '',
     more: true,
   },
+  {
+    slug: 'tify',
+    year: '2023',
+    title: 'TIFY',
+    role: 'PM & Frontend Lead',
+    summary:
+      '원하는 선물을 펀딩받아 축하받는 서비스. 삼성청년SW아카데미에서 PM 겸 Frontend Lead로 참여해 Firebase 알림 시스템과 S3 이미지 스토리지를 구축.',
+    description:
+      '2023년 1월부터 2월까지 삼성청년SW아카데미에서 PM 겸 Frontend Lead로 참여해 만든, 원하는 선물을 ' +
+      '펀딩받아 축하받는 서비스입니다. Firebase로 NoSQL 기반 알림 서비스를 구현했고, 폼·버튼·페이지 ' +
+      '라벨 등 컴포넌트 단위로 UI를 최적화했습니다. S3 버킷을 생성해 이미지 파일을 저장하고 별도로 ' +
+      '분리된 DB를 관리했습니다.',
+    tags: ['Firebase', 'AWS S3'],
+    thumbnail: withBase('5.tify/logo.svg'),
+    images: [
+      { src: withBase('5.tify/tify1.png'), alt: 'TIFY 회원가입 화면' },
+      { src: withBase('5.tify/tify2.png'), alt: 'TIFY 선물 축하하기(펀딩) 화면' },
+      { src: withBase('5.tify/tify3.png'), alt: 'TIFY 감사카드 보내기 화면' },
+      { src: withBase('5.tify/tify4.png'), alt: 'TIFY 기념일 히스토리 및 카드함 화면' },
+    ],
+    liveUrl: '',
+    repoUrl: '',
+    more: true,
+  },
+  {
+    slug: 'fins',
+    year: '2022',
+    title: 'FINS',
+    role: 'PM & Frontend',
+    summary:
+      '선호하는 영화를 기반으로 한 나만의 영화 SNS 서비스. 삼성청년SW아카데미 프로젝트 우수상(삼성전자) 수상.',
+    description:
+      '2022년 11월 삼성청년SW아카데미에서 진행한, 선호하는 영화를 기반으로 한 나만의 영화 SNS ' +
+      '서비스입니다. 1만 4천여 개의 영화 썸네일을 랜덤하게 표출하고, Intersection Observer로 무한 ' +
+      '스크롤을 구현했습니다. Python·Pandas로 영화 데이터를 웹크롤링했고, Vue.js·JavaScript·Vite로 ' +
+      '프론트엔드를, Python·Django·SQLite로 백엔드를 구축했습니다.',
+    award: '삼성전자 프로젝트 우수상',
+    tags: ['Vue.js', 'JavaScript', 'Vite', 'Python', 'Django', 'SQLite'],
+    thumbnail: withBase('6.fins/logo.png'),
+    images: [
+      { src: withBase('6.fins/fins1.png'), alt: 'FINS 로그인/회원가입 화면' },
+      { src: withBase('6.fins/fins2.png'), alt: 'FINS 영화 목록 화면' },
+      { src: withBase('6.fins/fins3.png'), alt: 'FINS Finder(스와이프) 화면' },
+      { src: withBase('6.fins/fins4.png'), alt: 'FINS 마이페이지 화면' },
+    ],
+    liveUrl: '',
+    repoUrl: '',
+    more: true,
+  },
 ];
