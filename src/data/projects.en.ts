@@ -200,4 +200,29 @@ PoseLandmarker.createFromOptions({
     liveUrl: '',
     repoUrl: '',
   },
+  {
+    slug: 'memorial',
+    year: '2023',
+    title: 'Memorial Shower',
+    role: 'Frontend',
+    summary:
+      'Solo-built the frontend for Memorial Shower, a project commissioned by Studio Bandal — SVG interactions and a 10,000+ item dataset optimized with filtering and infinite scroll.',
+    description:
+      'Built the entire frontend solo for Memorial Shower, a project commissioned by Studio Bandal, ' +
+      'between September and November 2023. Built the service from scratch with React, TypeScript, ' +
+      "and React Query — implementing user event handlers directly on SVG for the artwork intro and " +
+      "workshop pages, and optimizing a 10,000+ item dataset with filtering and infinite scroll on " +
+      "the \"Dongil Kim's Closet\" page.",
+    tags: ['React', 'TypeScript', 'React Query'],
+    thumbnail: withBase('4.memorial/logo.svg'),
+    images: [
+      { src: withBase('4.memorial/memorial1.png'), alt: 'Memorial Shower home screen' },
+      { src: withBase('4.memorial/memorial2.png'), alt: 'Memorial Shower artwork intro screen' },
+      { src: withBase('4.memorial/memorial3.png'), alt: 'Memorial Shower workshop screen' },
+      { src: withBase('4.memorial/memorial4.png'), alt: "Dongil Kim's Closet screen" },
+    ],
+    liveUrl: 'https://memorialshower.com/',
+    repoUrl: '',
+    more: true,
+  },
 ];

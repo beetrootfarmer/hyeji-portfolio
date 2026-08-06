@@ -4,8 +4,8 @@ import { useLocale } from '../i18n/LocaleContext';
 import './ProjectCard.css';
 
 const text = {
-  en: { appStore: 'View on App Store ↗' },
-  ko: { appStore: '앱스토어에서 보기 ↗' },
+  en: { liveSite: 'View live site ↗' },
+  ko: { liveSite: '라이브 사이트 보기 ↗' },
 } as const;
 
 interface ProjectCardProps {
@@ -20,7 +20,7 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
 
   return (
     <motion.div
-      className="project-card"
+      className={project.thumbnail ? 'project-card' : 'project-card project-card-no-media'}
       role="button"
       tabIndex={0}
       data-cursor-hover
@@ -37,13 +37,15 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
       transition={{ duration: 0.5, delay: index * 0.06 }}
       layoutId={`card-${project.slug}`}
     >
-      <div className="project-card-media">
-        <motion.img
-          src={project.thumbnail}
-          alt={`${project.title} logo`}
-          layoutId={`thumbnail-${project.slug}`}
-        />
-      </div>
+      {project.thumbnail && (
+        <div className="project-card-media">
+          <motion.img
+            src={project.thumbnail}
+            alt={`${project.title} logo`}
+            layoutId={`thumbnail-${project.slug}`}
+          />
+        </div>
+      )}
       <div className="project-card-meta">
         <span className="project-card-index">{String(index + 1).padStart(2, '0')}</span>
         <h3 className="project-card-title">{project.title}</h3>
@@ -66,7 +68,7 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
             data-cursor-hover
             onClick={(event) => event.stopPropagation()}
           >
-            {t.appStore}
+            {t.liveSite}
           </a>
         )}
       </div>

@@ -124,6 +124,17 @@
   text-decoration: underline;
 }
 
+.project-card-no-media {
+  grid-template-columns: 1fr;
+}
+
+.project-card-no-media .project-card-meta,
+.project-card-no-media .project-card-summary,
+.project-card-no-media .project-card-award,
+.project-card-no-media .project-card-footer {
+  grid-column: 1;
+}
+
 @media (max-width: 640px) {
   .project-card {
     grid-template-columns: 1fr;

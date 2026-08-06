@@ -190,4 +190,28 @@ PoseLandmarker.createFromOptions({
     liveUrl: '',
     repoUrl: '',
   },
+  {
+    slug: 'memorial',
+    year: '2023',
+    title: 'Memorial Shower',
+    role: 'Frontend',
+    summary:
+      '스튜디오 반달이 의뢰한 메모리얼 샤워 서비스의 프론트엔드를 단독 개발. SVG 인터랙션과 1만 건 이상 데이터의 필터링·무한스크롤 최적화.',
+    description:
+      '2023년 9월부터 11월까지 스튜디오 반달이 의뢰한 메모리얼 샤워 서비스의 프론트엔드를 단독으로 ' +
+      '개발했습니다. React·TypeScript·React Query로 서비스 전체를 새로 구축했고, 작품 소개와 워크숍 ' +
+      '페이지에서는 SVG 위에 사용자 이벤트 핸들러를 구현했습니다. \'김동일의 옷장\' 페이지에서는 1만 건이 ' +
+      '넘는 데이터를 필터링 기능과 무한 스크롤로 최적화했습니다.',
+    tags: ['React', 'TypeScript', 'React Query'],
+    thumbnail: withBase('4.memorial/logo.svg'),
+    images: [
+      { src: withBase('4.memorial/memorial1.png'), alt: 'Memorial Shower 메인 화면' },
+      { src: withBase('4.memorial/memorial2.png'), alt: 'Memorial Shower 작품 소개 화면' },
+      { src: withBase('4.memorial/memorial3.png'), alt: 'Memorial Shower 워크숍 화면' },
+      { src: withBase('4.memorial/memorial4.png'), alt: '김동일의 옷장 화면' },
+    ],
+    liveUrl: 'https://memorialshower.com/',
+    repoUrl: '',
+    more: true,
+  },
 ];

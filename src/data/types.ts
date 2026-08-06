@@ -27,10 +27,12 @@ export interface Project {
   description: string;
   award?: string;
   tags: string[];
-  thumbnail: string;
+  thumbnail?: string;
   images: ProjectImage[];
   problems?: ProjectProblem[];
   code?: ProjectCodeSnippet;
   liveUrl?: string;
   repoUrl?: string;
+  /** Shown under a "show more" toggle instead of the main list. */
+  more?: boolean;
 }
