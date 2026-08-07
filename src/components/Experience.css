@@ -107,6 +107,14 @@
   opacity: 0.6;
 }
 
+.experience-gap-period {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 .experience-gap-bullet {
   color: var(--fg-dim);
 }

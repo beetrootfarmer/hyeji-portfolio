@@ -265,7 +265,7 @@ PoseLandmarker.createFromOptions({
       'the backend with Python, Django, and SQLite.',
     award: 'Project Excellence Award (Samsung Electronics)',
     tags: ['Vue.js', 'JavaScript', 'Vite', 'Python', 'Django', 'SQLite'],
-    thumbnail: withBase('6.fins/logo.png'),
+    thumbnail: withBase('6.fins/logo.svg'),
     images: [
       { src: withBase('6.fins/fins1.png'), alt: 'FINS login/sign-up screen' },
       { src: withBase('6.fins/fins2.png'), alt: 'FINS movie grid screen' },

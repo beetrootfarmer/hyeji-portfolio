@@ -252,7 +252,7 @@ PoseLandmarker.createFromOptions({
       '프론트엔드를, Python·Django·SQLite로 백엔드를 구축했습니다.',
     award: '삼성전자 프로젝트 우수상',
     tags: ['Vue.js', 'JavaScript', 'Vite', 'Python', 'Django', 'SQLite'],
-    thumbnail: withBase('6.fins/logo.png'),
+    thumbnail: withBase('6.fins/logo.svg'),
     images: [
       { src: withBase('6.fins/fins1.png'), alt: 'FINS 로그인/회원가입 화면' },
       { src: withBase('6.fins/fins2.png'), alt: 'FINS 영화 목록 화면' },

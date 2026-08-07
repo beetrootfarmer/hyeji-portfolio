@@ -34,7 +34,7 @@ const copy: Record<'en' | 'ko', HeroCopy> = {
     ],
     tagline: [
       'Conceived and designed an app that won a KSPO award,',
-      'then rebuilt its backend and shipped to the App Store in two months.',
+      'then rebuilt its backend and shipped to the App Store.',
       'Ran the web side of two fandom apps with 100K+ downloads across four languages.',
     ],
     sub: 'React · TypeScript · Next.js. Three years in.',
@@ -53,7 +53,7 @@ const copy: Record<'en' | 'ko', HeroCopy> = {
     ],
     tagline: [
       '직접 기획한 앱으로 국민체육진흥공단(KSPO) 수상,',
-      '백엔드를 새로 구축해 2개월 만에 App Store 출시.',
+      '백엔드를 새로 구축해 App Store 출시.',
       '누적 10만 다운로드 팬덤 앱 2종의 웹을 4개 국어로 운영.',
     ],
     sub: 'React · TypeScript · Next.js, 3년차.',

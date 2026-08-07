@@ -12,6 +12,7 @@ interface JobEntry {
 interface GapEntry {
   variant: 'gap';
   label: string;
+  period?: string;
 }
 type JobItem = JobEntry | GapEntry;
 
@@ -43,6 +44,7 @@ const content: Record<'en' | 'ko', ExperienceCopy> = {
       {
         variant: 'gap',
         label: 'Built and shipped Beeve, entered it in a public data competition, and won an award',
+        period: 'Sep 2025 ~',
       },
       {
         period: 'Mar 2024 — Aug 2025',
@@ -92,6 +94,7 @@ const content: Record<'en' | 'ko', ExperienceCopy> = {
       {
         variant: 'gap',
         label: 'Beeve 개발·공모전 출품 및 수상',
+        period: '2025.09 ~',
       },
       {
         period: '2024.03 — 2025.08',
@@ -156,6 +159,7 @@ export function Experience() {
                   ·
                 </span>
                 {job.label}
+                {job.period && <span className="experience-gap-period">{job.period}</span>}
               </motion.p>
             ) : (
               <motion.div
