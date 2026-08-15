@@ -38,8 +38,8 @@ const copy: Record<'en' | 'ko', HeroCopy> = {
       'Ran the web side of two fandom apps with 100K+ downloads across four languages.',
     ],
     sub: 'React · TypeScript · Next.js. Three years in.',
-    spiralLabel: 'A graphic of an infinitely expanding spiral, representing entropy.',
-    spiralCaption: 'An infinitely expanding spiral — entropy',
+    spiralLabel: 'A graphic of a spiral that expands infinitely around a center, representing entropy.',
+    spiralCaption: 'Entropy, expanding infinitely around a center',
     scroll: 'Scroll',
   },
   ko: {
@@ -57,8 +57,8 @@ const copy: Record<'en' | 'ko', HeroCopy> = {
       '누적 10만 다운로드 팬덤 앱 2종의 웹을 4개 국어로 운영.',
     ],
     sub: 'React · TypeScript · Next.js, 3년차.',
-    spiralLabel: '무한히 확장하는 나선, 엔트로피를 형상화한 그래픽',
-    spiralCaption: '무한히 확장하는 나선 — 엔트로피',
+    spiralLabel: '중심을 가지고 무한히 확장하는 나선, 엔트로피를 형상화한 그래픽',
+    spiralCaption: '중심을 가지고 무한히 확장해가는 엔트로피',
     scroll: '스크롤',
   },
 };

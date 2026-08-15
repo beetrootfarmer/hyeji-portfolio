@@ -92,7 +92,7 @@ PoseLandmarker.createFromOptions({
     description:
       'Built at Genesis Nest as a frontend engineer between April 2024 and April 2025: the fandom ' +
       'community apps "Churrrrr" and "Dayoff", plus their admin service. From a live-service incident ' +
-      'to deployment optimization and a team-wide coding convention, here are three core problems ' +
+      'to deployment optimization and a team-wide coding convention, here are four core problems ' +
       'from development and how I solved them.',
     tags: ['Next.js', 'TypeScript', 'Docker', 'CSS'],
     thumbnail: withBase('3.fandom/fandom_logo.png'),
@@ -131,6 +131,24 @@ PoseLandmarker.createFromOptions({
           "references and other teams' conventions.",
         solution: 'Standardized on union types + as const as the team convention.',
         result: 'Smaller bundles, stronger type safety, and better code quality across the team.',
+      },
+      {
+        title: 'Fixing timezone ambiguity in the admin schedule list',
+        problem:
+          "While reviewing the search spec for the admin schedule list page, I found that the date/time " +
+          "reference was defined as KST only. Since fandom app data includes overseas schedules, times " +
+          "shown in the list could read ambiguously. I raised it with the planning team, who checked " +
+          "with the actual users — idol agencies — and confirmed they wanted to see local time instead. " +
+          "The original requirement didn't match how it would actually be used.",
+        solution:
+          "After revising the spec and design, I implemented it as follows: the search filter now " +
+          "operates on the user's local timezone, and the schedule display — which previously showed " +
+          "only date and time — now appends the UTC offset so the registered time is conveyed exactly " +
+          "as entered.",
+        result:
+          "Learned that \"which timezone counts as the reference\" was fundamentally a data-definition " +
+          "question, and that not settling it before development makes the cost of fixing it later " +
+          "much higher.",
       },
     ],
     liveUrl: '',

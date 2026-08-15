@@ -61,7 +61,7 @@ const content: Record<'en' | 'ko', ExperienceCopy> = {
       },
       {
         period: 'Jul 2023 — Feb 2024',
-        org: 'Fairy Inc.',
+        org: 'Fairytech Inc.',
         role: 'Frontend Research Engineer · Full-time · 8 mo',
         points: [
           'Built a React dashboard for ad campaign management and performance analytics',
@@ -111,7 +111,7 @@ const content: Record<'en' | 'ko', ExperienceCopy> = {
       },
       {
         period: '2023.07 — 2024.02',
-        org: '(주) 페어리',
+        org: '(주) 페어리테크',
         role: 'Frontend 개발 연구원 · 정규직 · 8개월',
         points: [
           'React 기반 타겟팅 광고 캠페인 관리 및 성과 분석 대시보드 구축',
