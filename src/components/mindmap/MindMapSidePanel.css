@@ -1,0 +1,126 @@
+.mindmap-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(380px, 92vw);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: var(--bg-alt);
+  border-left: 1px solid var(--line);
+  overflow-y: auto;
+  z-index: 20;
+  cursor: auto;
+}
+
+.mindmap-panel-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: none;
+}
+
+.mindmap-panel-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.mindmap-panel-period {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--fg-dim);
+}
+
+.mindmap-panel-title {
+  margin-top: 0.6rem;
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  text-transform: none;
+}
+
+.mindmap-panel-summary {
+  margin-top: 1rem;
+  color: var(--fg-dim);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.mindmap-panel-bullets {
+  margin: 1rem 0 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.mindmap-panel-bullets li {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--fg-dim);
+}
+
+.mindmap-panel-bullets li::marker {
+  color: var(--accent);
+}
+
+.mindmap-panel-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.mindmap-panel-tags li {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.22rem 0.6rem;
+}
+
+.mindmap-panel-image {
+  margin-top: 1.25rem;
+  width: 100%;
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.mindmap-panel-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.mindmap-panel-links a {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.mindmap-panel-links a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .mindmap-panel {
+    width: 100%;
+  }
+}

@@ -15,7 +15,7 @@
   stroke: var(--line);
   stroke-width: 1;
   opacity: 0.5;
-  transition: stroke 0.18s ease-out, stroke-width 0.18s ease-out, opacity 0.18s ease-out;
+  transition: stroke 0.18s ease-out, stroke-width 0.18s ease-out, opacity 0.2s ease-out;
 }
 
 .mindmap-link-relation {
