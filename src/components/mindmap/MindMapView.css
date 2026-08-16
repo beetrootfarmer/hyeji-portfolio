@@ -50,7 +50,16 @@
   fill: var(--bg-alt);
   stroke: var(--fg-dim);
   stroke-width: 1.5;
-  transition: stroke 0.18s ease-out, opacity 0.14s ease-out, fill 0.18s ease-out;
+  stroke-dasharray: 0 0;
+  transition: stroke 0.18s ease-out, opacity 0.14s ease-out, fill 0.18s ease-out, stroke-dasharray 0.2s ease-out;
+}
+
+.mindmap-node.is-dragging circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.1s ease-out, filter 0.1s ease-out;
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 6px var(--accent));
 }
 
 .mindmap-node text {

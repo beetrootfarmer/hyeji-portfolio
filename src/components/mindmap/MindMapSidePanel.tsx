@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import type { MindmapNode } from '../../data/mindmap/types';
 import { useLocale } from '../../i18n/LocaleContext';
@@ -22,13 +23,24 @@ export function MindMapSidePanel({ node, onClose }: MindMapSidePanelProps) {
   const { locale } = useLocale();
   const t = text[locale];
   const detail = node.detail;
+  const prefersReducedMotion = useRef(
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  ).current;
 
   return (
     <motion.div
       className="mindmap-panel"
-      initial={{ x: '100%', opacity: 0 }}
-      animate={{ x: 0, opacity: 1, transition: { delay: 0.12, duration: 0.28, ease: 'easeOut' as const } }}
-      exit={{ x: '100%', opacity: 0, transition: { duration: 0.2, ease: 'easeIn' as const } }}
+      initial={prefersReducedMotion ? false : { x: '100%', opacity: 0 }}
+      animate={{
+        x: 0,
+        opacity: 1,
+        transition: prefersReducedMotion ? { duration: 0 } : { delay: 0.12, duration: 0.28, ease: 'easeOut' as const },
+      }}
+      exit={{
+        x: '100%',
+        opacity: 0,
+        transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.2, ease: 'easeIn' as const },
+      }}
       onClick={(event) => event.stopPropagation()}
     >
       <button type="button" className="mindmap-panel-close" data-cursor-hover onClick={onClose} aria-label={t.close}>

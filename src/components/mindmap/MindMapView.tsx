@@ -321,6 +321,7 @@ export function MindMapView() {
           if (!event.active) simulation.alphaTarget(0.3).restart();
           n.fx = n.x;
           n.fy = n.y;
+          el.querySelector('.mindmap-node')?.classList.add('is-dragging');
         })
         .on('drag', (event) => {
           n.fx = event.x;
@@ -329,7 +330,18 @@ export function MindMapView() {
         .on('end', (event) => {
           if (!event.active) simulation.alphaTarget(0);
           n.pinned = true;
-          el.setAttribute('data-pinned', 'true');
+          el.querySelector('.mindmap-node')?.classList.remove('is-dragging');
+          // Pinning shows the dashed stroke immediately; unpinning (dblclick,
+          // below) animates it back via the circle's normal CSS transition.
+          const circle = el.querySelector('circle');
+          if (circle instanceof SVGElement) {
+            circle.style.transition = 'none';
+            el.setAttribute('data-pinned', 'true');
+            void circle.getBoundingClientRect();
+            circle.style.transition = '';
+          } else {
+            el.setAttribute('data-pinned', 'true');
+          }
         });
 
       d3.select(el)
@@ -654,7 +666,11 @@ export function MindMapView() {
                       }}
                       initial={prefersReducedMotion ? false : { opacity: 0, scale: 0 }}
                       animate={{ opacity: isDimmed ? 0.15 : 1, scale: isSelected ? 1.15 : 1 }}
-                      exit={{ opacity: 0, scale: 0.3, transition: { duration: 0.18, ease: 'easeIn' as const } }}
+                      exit={{
+                        opacity: 0,
+                        scale: 0.3,
+                        transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.18, ease: 'easeIn' as const },
+                      }}
                       transition={transition}
                       whileHover={{ scale: isSelected ? 1.15 : 1.08 }}
                       whileTap={{ scale: 1.12 }}
