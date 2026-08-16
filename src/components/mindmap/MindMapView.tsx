@@ -5,6 +5,7 @@ import { getMindmapData } from '../../data/mindmap';
 import type { MindmapNode } from '../../data/mindmap/types';
 import { useLocale } from '../../i18n/LocaleContext';
 import { MindMapSidePanel } from './MindMapSidePanel';
+import { MindMapSearchBar } from './MindMapSearchBar';
 import './MindMapView.css';
 
 interface SimNode extends MindmapNode, d3.SimulationNodeDatum {
@@ -55,6 +56,12 @@ export function MindMapView() {
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
   const [enteringLinkKeys, setEnteringLinkKeys] = useState<Set<string>>(new Set());
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [searchInput, setSearchInput] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
+  const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
+  const [showTags, setShowTags] = useState(false);
+  const [pulsingIds, setPulsingIds] = useState<Set<string>>(new Set());
+  const prevMatchedRef = useRef<Set<string>>(new Set());
 
   const prefersReducedMotion = useRef(
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -78,6 +85,12 @@ export function MindMapView() {
 
   const selectedNodeData = selectedId ? fullData.nodes.find((n) => n.id === selectedId) ?? null : null;
 
+  const allTags = useMemo(() => {
+    const set = new Set<string>();
+    fullData.nodes.forEach((n) => n.tags.forEach((tag) => set.add(tag)));
+    return Array.from(set).sort();
+  }, [fullData]);
+
   // Which node ids should stay at full opacity while something is selected
   // (the selection itself, plus everything directly linked to it).
   const focusedIds = useMemo(() => {
@@ -90,9 +103,63 @@ export function MindMapView() {
     return set;
   }, [selectedId, links]);
 
+  // Search/tag filter matches among currently-rendered nodes (collapsed
+  // depth-2 case studies are excluded — they only exist once expanded).
+  const matchedIdSet = useMemo(() => {
+    if (debouncedQuery === '' && activeTags.size === 0) return null;
+    const set = new Set<string>();
+    nodes.forEach((n) => {
+      const textMatch =
+        debouncedQuery !== '' &&
+        (n.label.toLowerCase().includes(debouncedQuery) || n.tags.some((tag) => tag.toLowerCase().includes(debouncedQuery)));
+      const tagMatch = activeTags.size > 0 && n.tags.some((tag) => activeTags.has(tag));
+      if (textMatch || tagMatch) set.add(n.id);
+    });
+    return set;
+  }, [nodes, debouncedQuery, activeTags]);
+
+  const filterActive = debouncedQuery !== '' || activeTags.size > 0;
+  // Selection spotlight takes priority; search/tag filter spotlight otherwise.
+  const effectiveFocusIds = focusedIds ?? matchedIdSet;
+
   useEffect(() => {
     dimensionsRef.current = dimensions;
   }, [dimensions]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setDebouncedQuery(searchInput.trim().toLowerCase()), 200);
+    return () => window.clearTimeout(timer);
+  }, [searchInput]);
+
+  // Search/tag filter and node-selection spotlights are mutually exclusive.
+  useEffect(() => {
+    if (filterActive) setSelectedId(null);
+  }, [filterActive]);
+
+  // Pulse newly-matched nodes once, and pan/fit the camera to the match set.
+  useEffect(() => {
+    if (!matchedIdSet) {
+      prevMatchedRef.current = new Set();
+      setPulsingIds(new Set());
+      return;
+    }
+    const newlyMatched = [...matchedIdSet].filter((id) => !prevMatchedRef.current.has(id));
+    prevMatchedRef.current = matchedIdSet;
+
+    if (!prefersReducedMotion && newlyMatched.length > 0) {
+      setPulsingIds((prev) => new Set([...prev, ...newlyMatched]));
+      window.setTimeout(() => {
+        setPulsingIds((prev) => {
+          const next = new Set(prev);
+          newlyMatched.forEach((id) => next.delete(id));
+          return next;
+        });
+      }, 600);
+    }
+
+    if (matchedIdSet.size > 0) fitToMatches(matchedIdSet);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [matchedIdSet]);
 
   // Measure the container so the graph fills its space and re-centers on resize.
   useEffect(() => {
@@ -142,6 +209,8 @@ export function MindMapView() {
     setLinks(simLinks);
     setExpandedIds(new Set());
     setSelectedId(null);
+    setSearchInput('');
+    setActiveTags(new Set());
   }, [locale]);
 
   // Run the force simulation. Position only — visuals are handled by CSS/Framer.
@@ -283,11 +352,50 @@ export function MindMapView() {
     const transform = d3.zoomIdentity
       .translate(visibleCenterX - node.x * ZOOM_TO_NODE_SCALE, centerY - node.y * ZOOM_TO_NODE_SCALE)
       .scale(ZOOM_TO_NODE_SCALE);
-    d3.select(svgRef.current)
-      .transition()
-      .duration(700)
-      .ease(d3.easeCubicInOut)
-      .call(zoom.transform, transform);
+    if (prefersReducedMotion) {
+      d3.select(svgRef.current).call(zoom.transform, transform);
+    } else {
+      d3.select(svgRef.current).transition().duration(700).ease(d3.easeCubicInOut).call(zoom.transform, transform);
+    }
+  }
+
+  // Single search/tag match: center it (no panel offset — the panel is
+  // closed while a filter is active). Multiple matches: fit them all in view.
+  function fitToMatches(ids: Set<string>) {
+    const zoom = zoomRef.current;
+    if (!svgRef.current || !zoom) return;
+    const matched = nodes.filter((n) => ids.has(n.id) && n.x != null && n.y != null);
+    if (matched.length === 0) return;
+
+    const { width, height } = dimensionsRef.current;
+    let transform: d3.ZoomTransform;
+
+    if (matched.length === 1) {
+      const node = matched[0];
+      transform = d3.zoomIdentity
+        .translate(width / 2 - node.x! * ZOOM_TO_NODE_SCALE, height / 2 - node.y! * ZOOM_TO_NODE_SCALE)
+        .scale(ZOOM_TO_NODE_SCALE);
+    } else {
+      const xs = matched.map((n) => n.x!);
+      const ys = matched.map((n) => n.y!);
+      const minX = Math.min(...xs);
+      const maxX = Math.max(...xs);
+      const minY = Math.min(...ys);
+      const maxY = Math.max(...ys);
+      const pad = 100;
+      const boxW = Math.max(maxX - minX, 1) + pad * 2;
+      const boxH = Math.max(maxY - minY, 1) + pad * 2;
+      const scale = Math.min(2, Math.max(0.3, Math.min(width / boxW, height / boxH)));
+      const cx = (minX + maxX) / 2;
+      const cy = (minY + maxY) / 2;
+      transform = d3.zoomIdentity.translate(width / 2 - cx * scale, height / 2 - cy * scale).scale(scale);
+    }
+
+    if (prefersReducedMotion) {
+      d3.select(svgRef.current).call(zoom.transform, transform);
+    } else {
+      d3.select(svgRef.current).transition().duration(700).ease(d3.easeCubicInOut).call(zoom.transform, transform);
+    }
   }
 
   function expandNode(parentId: string) {
@@ -341,6 +449,8 @@ export function MindMapView() {
   }
 
   function handleNodeClick(n: SimNode) {
+    setSearchInput('');
+    setActiveTags(new Set());
     setSelectedId(n.id);
     panToNode(n);
     if (childrenMap.has(n.id)) {
@@ -351,6 +461,20 @@ export function MindMapView() {
 
   function closePanel() {
     setSelectedId(null);
+  }
+
+  function toggleTag(tag: string) {
+    setActiveTags((prev) => {
+      const next = new Set(prev);
+      if (next.has(tag)) next.delete(tag);
+      else next.add(tag);
+      return next;
+    });
+  }
+
+  function clearFilter() {
+    setSearchInput('');
+    setActiveTags(new Set());
   }
 
   useEffect(() => {
@@ -369,6 +493,17 @@ export function MindMapView() {
 
   return (
     <div className="mindmap-view" ref={containerRef}>
+      <MindMapSearchBar
+        value={searchInput}
+        onChange={setSearchInput}
+        allTags={allTags}
+        activeTags={activeTags}
+        onToggleTag={toggleTag}
+        showTags={showTags}
+        onToggleShowTags={() => setShowTags((v) => !v)}
+        onClear={clearFilter}
+        hasFilter={filterActive}
+      />
       <svg
         ref={svgRef}
         width="100%"
@@ -381,7 +516,9 @@ export function MindMapView() {
             {links.map((l) => {
               const key = `${l.sourceId}->${l.targetId}`;
               const isFocusedLink = selectedId !== null && (l.sourceId === selectedId || l.targetId === selectedId);
-              const isDimmedLink = selectedId !== null && !isFocusedLink;
+              const isFilterMatchLink =
+                selectedId === null && matchedIdSet !== null && matchedIdSet.has(l.sourceId) && matchedIdSet.has(l.targetId);
+              const isDimmedLink = selectedId !== null ? !isFocusedLink : matchedIdSet !== null ? !isFilterMatchLink : false;
               const isEntering = enteringLinkKeys.has(key);
               return (
                 <line
@@ -394,7 +531,7 @@ export function MindMapView() {
                     'mindmap-link',
                     `mindmap-link-${l.kind}`,
                     isDimmedLink ? 'is-dim' : '',
-                    isFocusedLink ? 'is-focused' : '',
+                    isFocusedLink || isFilterMatchLink ? 'is-focused' : '',
                   ]
                     .filter(Boolean)
                     .join(' ')}
@@ -409,8 +546,10 @@ export function MindMapView() {
                 const isChild = n.depth === 2;
                 const delay = n.depth === 0 ? 0 : depth1Index++ * stagger;
                 const isSelected = n.id === selectedId;
-                const isDimmed = focusedIds !== null && !focusedIds.has(n.id);
-                const dimFocusActive = focusedIds !== null;
+                const isMatch = matchedIdSet !== null && matchedIdSet.has(n.id);
+                const isPulsing = pulsingIds.has(n.id);
+                const isDimmed = effectiveFocusIds !== null && !effectiveFocusIds.has(n.id);
+                const dimFocusActive = effectiveFocusIds !== null;
 
                 const transition = prefersReducedMotion
                   ? { duration: 0 }
@@ -433,7 +572,7 @@ export function MindMapView() {
                     className="mindmap-node-position"
                   >
                     <motion.g
-                      className={`mindmap-node mindmap-node-${n.type}${isDimmed ? ' is-dim' : ''}${isSelected ? ' is-focused' : ''}`}
+                      className={`mindmap-node mindmap-node-${n.type}${isDimmed ? ' is-dim' : ''}${isSelected ? ' is-focused' : ''}${isMatch ? ' is-match' : ''}`}
                       data-depth={n.depth}
                       data-cursor-hover
                       onClick={(event) => {
@@ -448,6 +587,7 @@ export function MindMapView() {
                       whileTap={{ scale: 1.12 }}
                     >
                       <circle r={radiusFor(n)} />
+                      {isPulsing && <circle className="mindmap-pulse-ring" r={radiusFor(n)} />}
                       <text dy={radiusFor(n) + 12}>{n.label}</text>
                     </motion.g>
                   </g>
