@@ -1,0 +1,140 @@
+.mindmap-view {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mindmap-svg {
+  display: block;
+  cursor: none;
+}
+
+/* ---- links ---- */
+.mindmap-link {
+  stroke: var(--line);
+  stroke-width: 1;
+  opacity: 0.5;
+  transition: stroke 0.18s ease-out, stroke-width 0.18s ease-out, opacity 0.18s ease-out;
+}
+
+.mindmap-link-relation {
+  stroke: var(--accent-2);
+  opacity: 0.22;
+}
+
+.mindmap-link.is-dim {
+  opacity: 0.08;
+  transition: opacity 0.14s ease-out;
+}
+
+.mindmap-link.is-focused {
+  stroke: var(--fg-dim);
+  stroke-width: 2;
+  opacity: 0.9;
+  transition: stroke 0.18s ease-out, stroke-width 0.18s ease-out, opacity 0.18s ease-out;
+}
+
+.mindmap-link-relation.is-focused {
+  stroke: var(--accent);
+  stroke-width: 2;
+  opacity: 0.9;
+}
+
+/* ---- nodes ---- */
+.mindmap-node-position {
+  will-change: transform;
+}
+
+.mindmap-node circle {
+  fill: var(--bg-alt);
+  stroke: var(--fg-dim);
+  stroke-width: 1.5;
+  transition: stroke 0.18s ease-out, opacity 0.14s ease-out, fill 0.18s ease-out;
+}
+
+.mindmap-node text {
+  fill: var(--fg-dim);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+  user-select: none;
+  transition: fill 0.18s ease-out, opacity 0.14s ease-out;
+}
+
+.mindmap-node.is-dim {
+  opacity: 0.15;
+  transition: opacity 0.14s ease-out;
+}
+
+.mindmap-node.is-focused circle {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.mindmap-node.is-focused text {
+  fill: var(--fg);
+}
+
+.mindmap-node-position[data-pinned='true'] circle {
+  stroke-dasharray: 3 3;
+}
+
+.mindmap-node-root circle {
+  fill: var(--accent);
+  stroke: none;
+}
+
+.mindmap-node-root text {
+  fill: var(--bg);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mindmap-node-career circle,
+.mindmap-node-project circle {
+  stroke: var(--accent);
+}
+
+.mindmap-node-career text,
+.mindmap-node-project text {
+  fill: var(--fg);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.mindmap-node-education circle {
+  stroke: var(--fg-dim);
+}
+
+.mindmap-node-skill circle {
+  stroke: var(--line);
+  fill: var(--bg);
+}
+
+.mindmap-node-skill text {
+  font-size: 9px;
+}
+
+/* depth-2 case-study nodes */
+.mindmap-node[data-depth='2'] circle {
+  stroke: var(--accent-2);
+}
+
+.mindmap-node[data-depth='2'] text {
+  fill: var(--fg-dim);
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mindmap-link,
+  .mindmap-node circle,
+  .mindmap-node text {
+    transition: none;
+  }
+}
