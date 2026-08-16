@@ -56,6 +56,7 @@ export function MindMapView() {
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
   const [enteringLinkKeys, setEnteringLinkKeys] = useState<Set<string>>(new Set());
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [keyboardFocusId, setKeyboardFocusId] = useState<string | null>(null);
   const [searchInput, setSearchInput] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
@@ -209,6 +210,7 @@ export function MindMapView() {
     setLinks(simLinks);
     setExpandedIds(new Set());
     setSelectedId(null);
+    setKeyboardFocusId(null);
     setSearchInput('');
     setActiveTags(new Set());
   }, [locale]);
@@ -446,12 +448,14 @@ export function MindMapView() {
       return next;
     });
     setSelectedId((current) => (current && childIds.has(current) ? null : current));
+    setKeyboardFocusId((current) => (current && childIds.has(current) ? null : current));
   }
 
   function handleNodeClick(n: SimNode) {
     setSearchInput('');
     setActiveTags(new Set());
     setSelectedId(n.id);
+    setKeyboardFocusId(n.id);
     panToNode(n);
     if (childrenMap.has(n.id)) {
       if (expandedIds.has(n.id)) collapseNode(n.id);
@@ -461,6 +465,41 @@ export function MindMapView() {
 
   function closePanel() {
     setSelectedId(null);
+  }
+
+  // Spatial arrow-key traversal: from the current keyboard focus, jump to the
+  // closest node lying within a 60°-wide cone around the pressed direction.
+  function moveKeyboardFocus(dx: number, dy: number) {
+    const current =
+      nodes.find((n) => n.id === keyboardFocusId) ?? nodes.find((n) => n.type === 'root') ?? nodes[0];
+    if (!current || current.x == null || current.y == null) return;
+    const cx = current.x;
+    const cy = current.y;
+
+    let best: SimNode | null = null;
+    let bestScore = Infinity;
+    nodes.forEach((n) => {
+      if (n.id === current.id || n.x == null || n.y == null) return;
+      const vx = n.x - cx;
+      const vy = n.y - cy;
+      const dist = Math.hypot(vx, vy);
+      if (dist === 0) return;
+      const dot = (vx * dx + vy * dy) / dist;
+      if (dot <= 0.5) return; // outside the ~60° direction cone
+      const score = dist / dot;
+      if (score < bestScore) {
+        bestScore = score;
+        best = n;
+      }
+    });
+
+    if (best) {
+      setKeyboardFocusId((best as SimNode).id);
+      panToNode(best as SimNode);
+    } else if (!keyboardFocusId) {
+      setKeyboardFocusId(current.id);
+      panToNode(current);
+    }
   }
 
   function toggleTag(tag: string) {
@@ -479,11 +518,44 @@ export function MindMapView() {
 
   useEffect(() => {
     function handleKey(event: KeyboardEvent) {
-      if (event.key === 'Escape') closePanel();
+      if (event.key === 'Escape') {
+        closePanel();
+        setKeyboardFocusId(null);
+        return;
+      }
+
+      const target = event.target as HTMLElement | null;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) return;
+
+      switch (event.key) {
+        case 'ArrowRight':
+          event.preventDefault();
+          moveKeyboardFocus(1, 0);
+          break;
+        case 'ArrowLeft':
+          event.preventDefault();
+          moveKeyboardFocus(-1, 0);
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          moveKeyboardFocus(0, -1);
+          break;
+        case 'ArrowDown':
+          event.preventDefault();
+          moveKeyboardFocus(0, 1);
+          break;
+        case 'Enter': {
+          const n = nodes.find((node) => node.id === keyboardFocusId);
+          if (n) handleNodeClick(n);
+          break;
+        }
+        default:
+          break;
+      }
     }
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, []);
+  }, [nodes, keyboardFocusId]);
 
   // Entry stagger: depth 0 immediate, depth 1 spread evenly so the whole
   // reveal stays under ~1s regardless of how many depth-1 nodes exist.
@@ -548,6 +620,7 @@ export function MindMapView() {
                 const isSelected = n.id === selectedId;
                 const isMatch = matchedIdSet !== null && matchedIdSet.has(n.id);
                 const isPulsing = pulsingIds.has(n.id);
+                const isKbdFocused = n.id === keyboardFocusId;
                 const isDimmed = effectiveFocusIds !== null && !effectiveFocusIds.has(n.id);
                 const dimFocusActive = effectiveFocusIds !== null;
 
@@ -588,6 +661,7 @@ export function MindMapView() {
                     >
                       <circle r={radiusFor(n)} />
                       {isPulsing && <circle className="mindmap-pulse-ring" r={radiusFor(n)} />}
+                      {isKbdFocused && <circle className="mindmap-kbd-ring" r={radiusFor(n) + 6} />}
                       <text dy={radiusFor(n) + 12}>{n.label}</text>
                     </motion.g>
                   </g>
