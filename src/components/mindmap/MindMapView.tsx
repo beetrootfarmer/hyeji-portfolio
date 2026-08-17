@@ -6,6 +6,7 @@ import type { MindmapNode } from '../../data/mindmap/types';
 import { useLocale } from '../../i18n/LocaleContext';
 import { MindMapSidePanel } from './MindMapSidePanel';
 import { MindMapSearchBar } from './MindMapSearchBar';
+import { MindMapLegend } from './MindMapLegend';
 import './MindMapView.css';
 
 interface SimNode extends MindmapNode, d3.SimulationNodeDatum {
@@ -23,7 +24,7 @@ const RADIUS: Record<MindmapNode['type'], number> = {
   career: 18,
   project: 18,
   education: 16,
-  skill: 8,
+  skill: 6,
 };
 
 const PANEL_WIDTH = 380;
@@ -62,6 +63,7 @@ export function MindMapView() {
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
   const [showTags, setShowTags] = useState(false);
   const [pulsingIds, setPulsingIds] = useState<Set<string>>(new Set());
+  const [showRelations, setShowRelations] = useState(false);
   const prevMatchedRef = useRef<Set<string>>(new Set());
 
   const prefersReducedMotion = useRef(
@@ -588,6 +590,7 @@ export function MindMapView() {
         onClear={clearFilter}
         hasFilter={filterActive}
       />
+      <MindMapLegend showRelations={showRelations} onToggleRelations={() => setShowRelations((v) => !v)} />
       <svg
         ref={svgRef}
         width="100%"
@@ -604,6 +607,7 @@ export function MindMapView() {
                 selectedId === null && matchedIdSet !== null && matchedIdSet.has(l.sourceId) && matchedIdSet.has(l.targetId);
               const isDimmedLink = selectedId !== null ? !isFocusedLink : matchedIdSet !== null ? !isFilterMatchLink : false;
               const isEntering = enteringLinkKeys.has(key);
+              const isRelationHidden = l.kind === 'relation' && !showRelations && !isFocusedLink && !isFilterMatchLink;
               return (
                 <line
                   key={key}
@@ -616,6 +620,7 @@ export function MindMapView() {
                     `mindmap-link-${l.kind}`,
                     isDimmedLink ? 'is-dim' : '',
                     isFocusedLink || isFilterMatchLink ? 'is-focused' : '',
+                    isRelationHidden ? 'is-relation-hidden' : '',
                   ]
                     .filter(Boolean)
                     .join(' ')}

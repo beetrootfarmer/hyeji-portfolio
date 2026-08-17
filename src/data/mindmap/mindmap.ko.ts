@@ -225,7 +225,6 @@ export const mindmapKo: MindmapData = {
     { id: 'skill-typescript', label: 'TypeScript', type: 'skill', depth: 1, tags: [] },
     { id: 'skill-mediapipe', label: 'MediaPipe', type: 'skill', depth: 1, tags: [] },
     { id: 'skill-nodejs', label: 'Node.js', type: 'skill', depth: 1, tags: [] },
-    { id: 'skill-postgresql', label: 'PostgreSQL', type: 'skill', depth: 1, tags: [] },
     { id: 'skill-docker', label: 'Docker', type: 'skill', depth: 1, tags: [] },
     { id: 'skill-css', label: 'CSS', type: 'skill', depth: 1, tags: [] },
     { id: 'skill-shadcn-cva', label: 'Shadcn/CVA', type: 'skill', depth: 1, tags: [] },
@@ -260,7 +259,6 @@ export const mindmapKo: MindmapData = {
     { source: 'root', target: 'skill-typescript', kind: 'hierarchy' },
     { source: 'root', target: 'skill-mediapipe', kind: 'hierarchy' },
     { source: 'root', target: 'skill-nodejs', kind: 'hierarchy' },
-    { source: 'root', target: 'skill-postgresql', kind: 'hierarchy' },
     { source: 'root', target: 'skill-docker', kind: 'hierarchy' },
     { source: 'root', target: 'skill-css', kind: 'hierarchy' },
     { source: 'root', target: 'skill-shadcn-cva', kind: 'hierarchy' },
@@ -305,7 +303,6 @@ export const mindmapKo: MindmapData = {
     { source: 'project-beeve', target: 'skill-typescript', kind: 'relation' },
     { source: 'project-beeve', target: 'skill-mediapipe', kind: 'relation' },
     { source: 'project-beeve', target: 'skill-nodejs', kind: 'relation' },
-    { source: 'project-beeve', target: 'skill-postgresql', kind: 'relation' },
     { source: 'project-beeve', target: 'skill-docker', kind: 'relation' },
 
     { source: 'project-fandom', target: 'skill-nextjs', kind: 'relation' },
