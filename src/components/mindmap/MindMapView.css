@@ -131,15 +131,24 @@
 }
 
 .mindmap-node-root text {
-  fill: var(--bg);
+  fill: var(--fg);
   font-family: var(--font-display);
   font-size: 13px;
   font-weight: 700;
 }
 
-.mindmap-node-career circle,
+/* career: filled accent (reads as "closest to root"); project: accent
+   outline. Same hue, opposite fill/stroke treatment so the two depth-1
+   categories that previously looked identical are distinguishable at a
+   glance. */
+.mindmap-node-career circle {
+  fill: var(--accent);
+  stroke: none;
+}
+
 .mindmap-node-project circle {
   stroke: var(--accent);
+  stroke-width: 2;
 }
 
 .mindmap-node-career text,
@@ -148,6 +157,18 @@
   font-family: var(--font-display);
   font-size: 11px;
   font-weight: 600;
+}
+
+/* Career's fill already sits on --accent, so focus/match/drag states need a
+   contrasting (not accent-on-accent) ring to stay visible. */
+.mindmap-node-career.is-focused circle,
+.mindmap-node-career.is-match circle {
+  stroke: var(--bg);
+  stroke-width: 2.5;
+}
+
+.mindmap-node-career.is-dragging circle {
+  filter: drop-shadow(0 0 6px var(--bg));
 }
 
 .mindmap-node-education circle {
