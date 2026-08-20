@@ -16,7 +16,7 @@ export const projectsEn: Project[] = [
       "Foundation's public data competition and has since launched on the iOS App Store. Below are " +
       "three core problems from development and how I solved them.",
     award: '2nd place, Korea Sports Promotion Foundation public data competition',
-    tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MediaPipe', 'Node.js', 'Docker'],
     thumbnail: withBase('1.beeve/beeve_logo.png'),
     images: [
       { src: withBase('1.beeve/beeve1.jpg'), alt: 'Beeve 6-Data radar score screen' },
@@ -80,7 +80,10 @@ PoseLandmarker.createFromOptions({
       },
     ],
     liveUrl: 'https://apps.apple.com/kr/app/beeve/id6759857773',
-    repoUrl: '',
+    repoUrls: [
+      { label: 'Beeve Web', url: 'https://github.com/Hi-Beeve/Beeve-web' },
+      { label: 'Beeve Server', url: 'https://github.com/Hi-Beeve/Beeve-server-v2' },
+    ],
   },
   {
     slug: 'fandom',
@@ -94,7 +97,7 @@ PoseLandmarker.createFromOptions({
       'community apps "Churrrrr" and "Dayoff", plus their admin service. From a live-service incident ' +
       'to deployment optimization and a team-wide coding convention, here are four core problems ' +
       'from development and how I solved them.',
-    tags: ['Next.js', 'TypeScript', 'Docker', 'CSS'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Docker', 'CSS'],
     thumbnail: withBase('3.fandom/fandom_logo.png'),
     images: [
       { src: withBase('3.fandom/fandom1.png'), alt: 'Churrrrr Official news feed screen' },
@@ -151,8 +154,6 @@ PoseLandmarker.createFromOptions({
           "much higher.",
       },
     ],
-    liveUrl: '',
-    repoUrl: '',
   },
   {
     slug: 'myfarm',
@@ -165,7 +166,7 @@ PoseLandmarker.createFromOptions({
       'Built at Genesis Nest as a frontend engineer between May and August 2025: a hybrid app for ' +
       'managing smart farms. From map marker rendering performance to cross-platform shared ' +
       'components, here are four core problems from development and how I solved them.',
-    tags: ['Next.js', 'TypeScript', 'Shadcn/CVA', 'App Bridge'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Shadcn/CVA', 'App Bridge'],
     thumbnail: withBase('2.myFarm/myfarm_logo.png'),
     images: [
       { src: withBase('2.myFarm/myfarm1.png'), alt: 'MyFarm+ login screen' },
@@ -215,8 +216,6 @@ PoseLandmarker.createFromOptions({
         result: 'A reusable component library that works across both the app and the web.',
       },
     ],
-    liveUrl: '',
-    repoUrl: '',
   },
   {
     slug: 'memorial',
@@ -240,7 +239,6 @@ PoseLandmarker.createFromOptions({
       { src: withBase('4.memorial/memorial4.png'), alt: "Dongil Kim's Closet screen" },
     ],
     liveUrl: 'https://memorialshower.com/',
-    repoUrl: '',
     more: true,
   },
   {
@@ -264,8 +262,7 @@ PoseLandmarker.createFromOptions({
       { src: withBase('5.tify/tify3.png'), alt: 'TIFY thank-you card screen' },
       { src: withBase('5.tify/tify4.png'), alt: 'TIFY occasion history and card archive screen' },
     ],
-    liveUrl: '',
-    repoUrl: '',
+    repoUrls: [{ label: 'GitHub', url: 'https://github.com/beetrootfarmer/TIFY' }],
     more: true,
   },
   {
@@ -290,8 +287,7 @@ PoseLandmarker.createFromOptions({
       { src: withBase('6.fins/fins3.png'), alt: 'FINS Finder (swipe) screen' },
       { src: withBase('6.fins/fins4.png'), alt: 'FINS my page screen' },
     ],
-    liveUrl: '',
-    repoUrl: '',
+    repoUrls: [{ label: 'GitHub', url: 'https://github.com/beetrootfarmer/fins_mr' }],
     more: true,
   },
 ];

@@ -32,7 +32,7 @@ export interface Project {
   problems?: ProjectProblem[];
   code?: ProjectCodeSnippet;
   liveUrl?: string;
-  repoUrl?: string;
+  repoUrls?: { label: string; url: string }[];
   /** Shown under a "show more" toggle instead of the main list. */
   more?: boolean;
 }

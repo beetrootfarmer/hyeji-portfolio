@@ -15,7 +15,7 @@ export const projectsKo: Project[] = [
       '국민체육진흥공단 공공데이터 경진대회에서 2위를 수상했으며, 현재 iOS 앱스토어에 정식 출시되어 ' +
       '있습니다. 개발 과정에서 마주한 핵심 문제 세 가지와 해결 과정은 아래와 같습니다.',
     award: '국민체육진흥공단 공공데이터 경진대회 2위',
-    tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MediaPipe', 'Node.js', 'Docker'],
     thumbnail: withBase('1.beeve/beeve_logo.png'),
     images: [
       { src: withBase('1.beeve/beeve1.jpg'), alt: 'Beeve 6-Data 레이더 점수 화면' },
@@ -76,7 +76,10 @@ PoseLandmarker.createFromOptions({
       },
     ],
     liveUrl: 'https://apps.apple.com/kr/app/beeve/id6759857773',
-    repoUrl: '',
+    repoUrls: [
+      { label: 'Beeve Web', url: 'https://github.com/Hi-Beeve/Beeve-web' },
+      { label: 'Beeve Server', url: 'https://github.com/Hi-Beeve/Beeve-server-v2' },
+    ],
   },
   {
     slug: 'fandom',
@@ -89,7 +92,7 @@ PoseLandmarker.createFromOptions({
       '2024년 4월부터 2025년 4월까지 제네시스네스트에서 프론트엔드로 참여해 만든 팬덤 커뮤니티 앱 ' +
       '「Churrrrr」, 「Dayoff」와 어드민 서비스입니다. 실서비스 장애 대응부터 배포 최적화, 팀 코딩 ' +
       '컨벤션 정립까지, 개발 과정에서 마주한 핵심 문제 네 가지와 해결 과정은 아래와 같습니다.',
-    tags: ['Next.js', 'TypeScript', 'Docker', 'CSS'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Docker', 'CSS'],
     thumbnail: withBase('3.fandom/fandom_logo.png'),
     images: [
       { src: withBase('3.fandom/fandom1.png'), alt: 'Churrrrr Official 뉴스 피드 화면' },
@@ -143,8 +146,6 @@ PoseLandmarker.createFromOptions({
           '수정 비용이 훨씬 커진다는 것을 배웠습니다.',
       },
     ],
-    liveUrl: '',
-    repoUrl: '',
   },
   {
     slug: 'myfarm',
@@ -157,7 +158,7 @@ PoseLandmarker.createFromOptions({
       '2025년 5월부터 8월까지 제네시스네스트에서 프론트엔드로 참여해 만든 스마트 농사 관리 서비스 ' +
       '하이브리드 앱입니다. 지도 마커 렌더링 성능 개선부터 크로스플랫폼 공통 컴포넌트 설계까지, ' +
       '개발 과정에서 마주한 핵심 문제 네 가지와 해결 과정은 아래와 같습니다.',
-    tags: ['Next.js', 'TypeScript', 'Shadcn/CVA', 'App Bridge'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Shadcn/CVA', 'App Bridge'],
     thumbnail: withBase('2.myFarm/myfarm_logo.png'),
     images: [
       { src: withBase('2.myFarm/myfarm1.png'), alt: '마이팜플러스 로그인 화면' },
@@ -203,8 +204,6 @@ PoseLandmarker.createFromOptions({
         result: '앱·웹 양쪽에서 재사용 가능한 컴포넌트 라이브러리를 구축했습니다.',
       },
     ],
-    liveUrl: '',
-    repoUrl: '',
   },
   {
     slug: 'memorial',
@@ -227,7 +226,6 @@ PoseLandmarker.createFromOptions({
       { src: withBase('4.memorial/memorial4.png'), alt: '김동일의 옷장 화면' },
     ],
     liveUrl: 'https://memorialshower.com/',
-    repoUrl: '',
     more: true,
   },
   {
@@ -250,8 +248,7 @@ PoseLandmarker.createFromOptions({
       { src: withBase('5.tify/tify3.png'), alt: 'TIFY 감사카드 보내기 화면' },
       { src: withBase('5.tify/tify4.png'), alt: 'TIFY 기념일 히스토리 및 카드함 화면' },
     ],
-    liveUrl: '',
-    repoUrl: '',
+    repoUrls: [{ label: 'GitHub', url: 'https://github.com/beetrootfarmer/TIFY' }],
     more: true,
   },
   {
@@ -275,8 +272,7 @@ PoseLandmarker.createFromOptions({
       { src: withBase('6.fins/fins3.png'), alt: 'FINS Finder(스와이프) 화면' },
       { src: withBase('6.fins/fins4.png'), alt: 'FINS 마이페이지 화면' },
     ],
-    liveUrl: '',
-    repoUrl: '',
+    repoUrls: [{ label: 'GitHub', url: 'https://github.com/beetrootfarmer/fins_mr' }],
     more: true,
   },
 ];

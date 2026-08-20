@@ -42,11 +42,6 @@ const content: Record<'en' | 'ko', ExperienceCopy> = {
         ],
       },
       {
-        variant: 'gap',
-        label: 'Built and shipped Beeve, entered it in a public data competition, and won an award',
-        period: 'Sep 2025 ~',
-      },
-      {
         period: 'Mar 2024 — Aug 2025',
         org: 'Genesis Nest',
         role: 'Frontend Engineer · Full-time · 1.5 yrs',
@@ -90,11 +85,6 @@ const content: Record<'en' | 'ko', ExperienceCopy> = {
           'React 기반 증빙서류 자동화 프로그램을 개발해 파편화된 문서 작성 프로세스 통합',
           '수기로 관리하던 주차 시스템을 React App으로 만들어 업무 효율 증대',
         ],
-      },
-      {
-        variant: 'gap',
-        label: 'Beeve 개발·공모전 출품 및 수상',
-        period: '2025.09 ~',
       },
       {
         period: '2024.03 — 2025.08',

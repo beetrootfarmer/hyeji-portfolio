@@ -32,8 +32,8 @@ const essays = {
     {
       title: 'The one who wrote most of the code',
       paragraphs: [
-        'I owned the web side of a fandom app. The frontend team grew to four early on, but by the time we moved into maintenance, I was the only one left.',
-        'That year alone set up everything after it. I restructured the codebase into a monorepo so a second app could ship on top of it, and when new engineers joined, I set the direction for the frontend code and onboarded them — because I was the only one who knew all of it.',
+        "I owned the web side of a fandom app. The frontend team grew to four early on, but once we moved into maintenance, I ran the web frontend solo for six months — everything from building screens to tracking down outages — and became the one person who knew the whole codebase.",
+        'I restructured the project into a monorepo so a second app could ship on top of it, and when new engineers joined, I set the direction for the frontend code and led their onboarding.',
       ],
     },
     {
@@ -55,14 +55,14 @@ const essays = {
     {
       title: '코드를 가장 많이 쓴 사람',
       paragraphs: [
-        '팬덤 앱의 웹을 전담했습니다. 처음엔 프론트 팀이 네 명까지 늘었지만, 운영 단계에 접어들면서 저 혼자 남았습니다.',
-        '혼자 붙잡고 있던 1년이 다음 단계를 만들었습니다. 구조를 모노레포로 정리해 두 번째 앱을 올릴 수 있게 했고, 새 팀원들이 합류했을 때 코드의 방향을 잡고 온보딩을 맡았습니다. 코드 전체를 알고 있는 사람이 저뿐이었기 때문입니다.',
+        '팬덤 앱의 웹을 전담했습니다. 처음엔 프론트 팀이 네 명까지 늘었지만, 운영 단계에 접어들면서 웹 프론트를 6개월간 혼자 맡았습니다. 화면을 만드는 것부터 장애를 잡는 일까지 맡으며 코드 전체를 아는 사람이 되었습니다.',
+        '프로젝트 구조를 모노레포로 정리해 두 번째 앱을 올릴 수 있게 했고, 새 팀원들이 합류했을 때 코드의 방향을 잡고 온보딩을 맡았습니다.',
       ],
     },
     {
       title: '10만 명이 쓰는 동안',
       paragraphs: [
-        '츄르와 데이오프, 두 앱 모두 누적 10만 다운로드를 넘겼습니다. 사용자는 한국에만 있지 않아서 한국어·영어·일본어·중국어 네 개 언어를 지원했고, i18n을 도입해 번역 파일을 직접 관리했습니다.',
+        'Churrrrr(츄르)와 Dayoff(데이오프), 두 앱 모두 누적 10만 다운로드를 넘겼습니다. 사용자는 한국에만 있지 않아서 한국어·영어·일본어·중국어 네 개 언어를 지원했고, i18n을 도입해 번역 파일을 직접 관리했습니다.',
         'QA 조직이 없는 팀이었습니다. 지원 범위를 정의해두고 최대한 예외 케이스와 기기 조건을 고려해 출시했지만, 그럼에도 예외가 있었기에 빠르게 대응하는 것이 중요했습니다. CS가 들어오면 기기와 OS, 브라우저에 따라 원인을 파악하고 fallback을 만들거나 호환되는 문법으로 수정했습니다.',
       ],
     },

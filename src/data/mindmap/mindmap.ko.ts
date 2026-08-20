@@ -105,12 +105,16 @@ export const mindmapKo: MindmapData = {
       label: 'Beeve',
       type: 'project',
       depth: 1,
-      tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
+      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MediaPipe', 'Node.js', 'Docker'],
       detail: {
         period: '2025',
         summary: '국민체력100 공공데이터를 활용해 스마트폰 카메라와 센서만으로 체력을 측정하는 서비스. iOS 앱스토어 정식 출시.',
         bullets: ['국민체육진흥공단 공공데이터 경진대회 2위'],
-        links: [{ label: '라이브 사이트', url: 'https://apps.apple.com/kr/app/beeve/id6759857773' }],
+        links: [
+          { label: '라이브 사이트', url: 'https://apps.apple.com/kr/app/beeve/id6759857773' },
+          { label: 'Beeve Web', url: 'https://github.com/Hi-Beeve/Beeve-web' },
+          { label: 'Beeve Server', url: 'https://github.com/Hi-Beeve/Beeve-server-v2' },
+        ],
         images: [withBase('1.beeve/beeve_logo.png')],
       },
     },
@@ -119,7 +123,7 @@ export const mindmapKo: MindmapData = {
       label: 'Churrrrr · Dayoff',
       type: 'project',
       depth: 1,
-      tags: ['Next.js', 'TypeScript', 'Docker', 'CSS'],
+      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Docker', 'CSS'],
       detail: {
         period: '2024',
         summary: '팬덤 커뮤니티 앱 「Churrrrr」·「Dayoff」와 어드민 서비스. iOS 16 렌더링 버그 대응부터 Docker 이미지 75% 감축까지.',
@@ -131,7 +135,7 @@ export const mindmapKo: MindmapData = {
       label: '마이팜플러스',
       type: 'project',
       depth: 1,
-      tags: ['Next.js', 'TypeScript', 'Shadcn/CVA', 'App Bridge'],
+      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Shadcn/CVA', 'App Bridge'],
       detail: {
         period: '2025',
         summary: '스마트 농사 관리 서비스 하이브리드 앱. 지도 마커 렌더링 최적화부터 토큰 보안 아키텍처 개편까지.',
@@ -160,6 +164,7 @@ export const mindmapKo: MindmapData = {
       detail: {
         period: '2023',
         summary: '원하는 선물을 펀딩받아 축하받는 서비스. PM 겸 Frontend Lead로 참여.',
+        links: [{ label: 'GitHub', url: 'https://github.com/beetrootfarmer/TIFY' }],
         images: [withBase('5.tify/logo.svg')],
       },
     },
@@ -172,6 +177,7 @@ export const mindmapKo: MindmapData = {
       detail: {
         period: '2022',
         summary: '선호하는 영화를 기반으로 한 나만의 영화 SNS 서비스. 삼성전자 프로젝트 우수상 수상.',
+        links: [{ label: 'GitHub', url: 'https://github.com/beetrootfarmer/fins_mr' }],
         images: [withBase('6.fins/logo.svg')],
       },
     },

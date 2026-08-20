@@ -105,12 +105,16 @@ export const mindmapEn: MindmapData = {
       label: 'Beeve',
       type: 'project',
       depth: 1,
-      tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
+      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MediaPipe', 'Node.js', 'Docker'],
       detail: {
         period: '2025',
         summary: "A fitness-measurement service built on Korea's national fitness public dataset, using only a phone's camera and sensors. Live on the iOS App Store.",
         bullets: ['2nd place, KSPO public data competition'],
-        links: [{ label: 'Live site', url: 'https://apps.apple.com/kr/app/beeve/id6759857773' }],
+        links: [
+          { label: 'Live site', url: 'https://apps.apple.com/kr/app/beeve/id6759857773' },
+          { label: 'Beeve Web', url: 'https://github.com/Hi-Beeve/Beeve-web' },
+          { label: 'Beeve Server', url: 'https://github.com/Hi-Beeve/Beeve-server-v2' },
+        ],
         images: [withBase('1.beeve/beeve_logo.png')],
       },
     },
@@ -119,7 +123,7 @@ export const mindmapEn: MindmapData = {
       label: 'Churrrrr · Dayoff',
       type: 'project',
       depth: 1,
-      tags: ['Next.js', 'TypeScript', 'Docker', 'CSS'],
+      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Docker', 'CSS'],
       detail: {
         period: '2024',
         summary: 'Fandom community apps "Churrrrr" and "Dayoff" plus an admin service — from an iOS 16 rendering bug to a 75% Docker image cut.',
@@ -131,7 +135,7 @@ export const mindmapEn: MindmapData = {
       label: 'MyFarm+',
       type: 'project',
       depth: 1,
-      tags: ['Next.js', 'TypeScript', 'Shadcn/CVA', 'App Bridge'],
+      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Shadcn/CVA', 'App Bridge'],
       detail: {
         period: '2025',
         summary: 'A hybrid smart-farm management app — from map marker rendering performance to a token-security architecture overhaul.',
@@ -160,6 +164,7 @@ export const mindmapEn: MindmapData = {
       detail: {
         period: '2023',
         summary: 'A gift-funding service where you get celebrated by crowdfunding the gift you want. PM and Frontend Lead.',
+        links: [{ label: 'GitHub', url: 'https://github.com/beetrootfarmer/TIFY' }],
         images: [withBase('5.tify/logo.svg')],
       },
     },
@@ -172,6 +177,7 @@ export const mindmapEn: MindmapData = {
       detail: {
         period: '2022',
         summary: 'A personal movie SNS service built around your favorite films. Won the Project Excellence Award (Samsung Electronics).',
+        links: [{ label: 'GitHub', url: 'https://github.com/beetrootfarmer/fins_mr' }],
         images: [withBase('6.fins/logo.svg')],
       },
     },

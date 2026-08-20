@@ -13,7 +13,6 @@ const text = {
     solution: 'Solution',
     result: 'Result',
     liveSite: 'Live site ↗',
-    source: 'Source ↗',
     closeZoom: 'Close zoomed image',
   },
   ko: {
@@ -23,7 +22,6 @@ const text = {
     solution: '해결',
     result: '결과',
     liveSite: '라이브 사이트 ↗',
-    source: '소스 코드 ↗',
     closeZoom: '확대 이미지 닫기',
   },
 } as const;
@@ -173,18 +171,18 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             </div>
           )}
 
-          {(project.liveUrl || project.repoUrl) && (
+          {(project.liveUrl || (project.repoUrls && project.repoUrls.length > 0)) && (
             <div className="project-detail-links">
               {project.liveUrl && (
                 <a href={project.liveUrl} target="_blank" rel="noreferrer" data-cursor-hover>
                   {t.liveSite}
                 </a>
               )}
-              {project.repoUrl && (
-                <a href={project.repoUrl} target="_blank" rel="noreferrer" data-cursor-hover>
-                  {t.source}
+              {project.repoUrls?.map((repo) => (
+                <a key={repo.url} href={repo.url} target="_blank" rel="noreferrer" data-cursor-hover>
+                  {repo.label} ↗
                 </a>
-              )}
+              ))}
             </div>
           )}
         </motion.div>

@@ -35,9 +35,9 @@ const copy: Record<'en' | 'ko', HeroCopy> = {
     tagline: [
       'Conceived and designed an app that won a KSPO award,',
       'then rebuilt its backend and shipped to the App Store.',
-      'Ran the web side of two fandom apps with 100K+ downloads across four languages.',
+      'Ran the webview of two hybrid apps with 100K+ downloads across four languages.',
     ],
-    sub: 'React · TypeScript · Next.js. Three years in.',
+    sub: 'React · TypeScript · Next.js · Tailwind CSS · Shadcn UI · TanStack Query · Flutter · Nest.js · Docker. Three years in.',
     spiralLabel: 'A graphic of a spiral that expands infinitely around a center, representing entropy.',
     spiralCaption: 'Entropy, expanding infinitely around a center',
     scroll: 'Scroll',
@@ -54,9 +54,9 @@ const copy: Record<'en' | 'ko', HeroCopy> = {
     tagline: [
       '직접 기획한 앱으로 국민체육진흥공단(KSPO) 수상,',
       '백엔드를 새로 구축해 App Store 출시.',
-      '누적 10만 다운로드 팬덤 앱 2종의 웹을 4개 국어로 운영.',
+      '누적 10만 다운로드 하이브리드 앱 2종의 웹뷰를 4개 국어로 운영.',
     ],
-    sub: 'React · TypeScript · Next.js, 3년차.',
+    sub: 'React · TypeScript · Next.js · Tailwind CSS · Shadcn UI · TanStack Query · Flutter · Nest.js · Docker, 3년차.',
     spiralLabel: '중심을 가지고 무한히 확장하는 나선, 엔트로피를 형상화한 그래픽',
     spiralCaption: '중심을 가지고 무한히 확장해가는 엔트로피',
     scroll: '스크롤',
