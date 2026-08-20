@@ -13,7 +13,7 @@ export const projectsKo: Project[] = [
       '2025년 9월부터 진행 중인 프로젝트로, PM 겸 프론트엔드로 참여해 국민체력100 공공데이터를 ' +
       '기반으로 스마트폰 카메라와 센서만으로 체력을 측정하는 서비스를 만들었습니다. 이 프로젝트로 ' +
       '국민체육진흥공단 공공데이터 경진대회에서 2위를 수상했으며, 현재 iOS 앱스토어에 정식 출시되어 ' +
-      '있습니다. 개발 과정에서 마주한 핵심 문제 세 가지와 해결 과정은 아래와 같습니다.',
+      '있습니다. 개발 과정에서 마주한 핵심 문제 다섯 가지와 해결 과정은 아래와 같습니다.',
     award: '국민체육진흥공단 공공데이터 경진대회 2위',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MediaPipe', 'Node.js', 'Docker'],
     thumbnail: withBase('1.beeve/beeve_logo.png'),
@@ -50,7 +50,7 @@ export const projectsKo: Project[] = [
         result: '3회 측정 중 유효 최솟값을 채택하고, 선행 반응을 자동 무효 처리해 측정 신뢰도를 확보했습니다.',
       },
       {
-        title: 'MediaPipe 포즈 추정 렌더링 최적화',
+        title: '브라우저 실시간 포즈 추정과 렌더링 최적화',
         problem:
           'detectForVideo()를 매 프레임 호출하니 CPU/GPU 부하로 프레임 드롭이 발생했습니다. setInterval은 ' +
           '브라우저 렌더링 사이클과 무관하게 실행되어 타이밍이 어긋난다는 것도 문제였습니다.',
@@ -73,6 +73,46 @@ PoseLandmarker.createFromOptions({
   runningMode: 'VIDEO', // 연속 프레임 최적화
 });`,
         },
+      },
+      {
+        title: 'Chart.js Radar 6각형 커스텀',
+        problem:
+          '국민체력100은 6개 항목으로 체력을 평가하는데, Chart.js Radar 차트는 기본적으로 원형 그리드로 ' +
+          '그려져 6각형 시각화가 불가능했습니다. circular: false 옵션을 적용해봤지만 그리드선이 데이터 ' +
+          '폴리곤과 어긋나 그대로 쓸 수 없었습니다. 등급 체계도 문제였습니다. 국민체력100은 1등급이 ' +
+          '가장 좋은데, 레이더 차트는 값이 클수록 바깥으로 뻗기 때문에 그대로 넣으면 잘하는 항목이 ' +
+          '안쪽으로 들어가버립니다.',
+        solution:
+          '내장 그리드를 투명 처리해 걷어내고, 6각형 그리드를 SVG 레이어로 직접 그려 차트 아래에 ' +
+          '배치했습니다. 등급은 역매핑 테이블로 변환해 1등급이 가장 바깥에 오도록 했고, 기본 애니메이션을 ' +
+          '끈 뒤 requestAnimationFrame 기반 선형 보간으로 직접 구현해 그리드와 폴리곤이 어긋나지 않게 ' +
+          '했습니다.',
+        result: '정확한 6각형 그리드 위에 등급이 직관적으로 표현되고, 진입 시 부드럽게 펼쳐지는 애니메이션을 확보했습니다.',
+        code: {
+          label: '6각형 그리드 + 등급 역매핑',
+          language: 'ts',
+          code: `// 내장 그리드를 숨기고 hex.svg 레이어로 대체
+grid: { color: 'transparent' }
+
+// 등급 역매핑 — 1등급(최고)이 가장 바깥에 오도록
+const GRADE_TO_VALUE = [0, 3.6, 2.9, 2.2, 1.2, 0];
+
+// 기본 애니메이션 대신 rAF 선형 보간
+animation: false → requestAnimationFrame(animate)`,
+        },
+      },
+      {
+        title: '수상 이후, 서비스로 만들기까지',
+        problem:
+          '공모전 수상 이후 실제 서비스로 출시하기 위해 백엔드를 새로 구축해야 했습니다. Express는 ' +
+          '자유도가 높은 만큼 혼자 개발하면 구조가 흐트러지기 쉽다고 판단했습니다.',
+        solution:
+          'Module·Controller·Service 구조가 강제되고 TypeScript를 자연스럽게 지원하는 Nest.js를 ' +
+          '선택했습니다. 국민체력100 기준에 따라 성별·연령대별 6항목 등급을 계산하는 로직을 구현하고, ' +
+          'Gemini API로 약점 분석 → 프롬프트 생성 → JSON 파싱 순의 운동 추천 알고리즘을 만들었습니다. ' +
+          '응답이 예상 형식을 벗어날 때를 대비해 fallback도 함께 설계했습니다. 배포는 Cloud Run ' +
+          '멀티스테이지 Docker 빌드로 자동화했습니다.',
+        result: '기획부터 프론트엔드, 백엔드, 앱스토어 심사까지 2개월 만에 완주해 iOS에 정식 출시했습니다.',
       },
     ],
     liveUrl: 'https://apps.apple.com/kr/app/beeve/id6759857773',

@@ -14,7 +14,7 @@ export const projectsEn: Project[] = [
       "physical fitness using only a smartphone's camera and sensors, powered by Korea's " +
       "national fitness public dataset. The project won 2nd place at the Korea Sports Promotion " +
       "Foundation's public data competition and has since launched on the iOS App Store. Below are " +
-      "three core problems from development and how I solved them.",
+      "five core problems from development and how I solved them.",
     award: '2nd place, Korea Sports Promotion Foundation public data competition',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MediaPipe', 'Node.js', 'Docker'],
     thumbnail: withBase('1.beeve/beeve_logo.png'),
@@ -53,7 +53,7 @@ export const projectsEn: Project[] = [
         result: 'The best of three valid readings is kept, and false starts are auto-invalidated for reliability.',
       },
       {
-        title: 'Pose estimation rendering optimization',
+        title: 'Real-time pose estimation and rendering in the browser',
         problem:
           "Calling detectForVideo() on every frame overloaded the CPU/GPU and dropped frames. setInterval " +
           "made it worse, since it runs independently of the browser's render cycle and drifts out of sync.",
@@ -77,6 +77,50 @@ PoseLandmarker.createFromOptions({
   runningMode: 'VIDEO', // optimized for continuous frames
 });`,
         },
+      },
+      {
+        title: 'Custom hexagonal Chart.js radar chart',
+        problem:
+          "National Fitness 100 scores fitness across six categories, but Chart.js's radar chart " +
+          "defaults to a circular grid, making a hexagonal visualization impossible. Setting " +
+          "circular: false didn't help either — the gridlines drifted out of alignment with the " +
+          "data polygon. The grading system was another problem: in National Fitness 100, grade 1 " +
+          "is the best, but radar charts push higher values further outward, so plotting the raw " +
+          "grades would push the best-performing categories toward the center.",
+        solution:
+          "Made the built-in grid transparent and drew a hexagonal grid directly as an SVG layer " +
+          "underneath the chart. Converted grades through a reverse-mapping table so grade 1 sits at " +
+          "the outermost ring, turned off the default animation, and implemented the entry animation " +
+          "myself with requestAnimationFrame-based linear interpolation so the grid and polygon never " +
+          "drift out of sync.",
+        result: 'Grades now read intuitively against an accurate hexagonal grid, with a smooth expand-in animation on entry.',
+        code: {
+          label: 'Hexagonal grid + grade reverse-mapping',
+          language: 'ts',
+          code: `// Hide the built-in grid, replace it with a hex.svg layer
+grid: { color: 'transparent' }
+
+// Reverse-map grades so grade 1 (best) sits outermost
+const GRADE_TO_VALUE = [0, 3.6, 2.9, 2.2, 1.2, 0];
+
+// Linear rAF interpolation instead of the default animation
+animation: false → requestAnimationFrame(animate)`,
+        },
+      },
+      {
+        title: 'From award to a real service',
+        problem:
+          "After winning the competition, I had to build a new backend to actually ship it as a real " +
+          "service. Express gives a lot of freedom, but building it solo, I judged that freedom would " +
+          "make the structure easy to lose control of.",
+        solution:
+          "I chose Nest.js instead, since it enforces a Module/Controller/Service structure and " +
+          "supports TypeScript natively. I implemented the logic for calculating grades across six " +
+          "categories by gender and age group per the National Fitness 100 standard, and built a " +
+          "workout-recommendation pipeline — weakness analysis via the Gemini API, prompt generation, " +
+          "then JSON parsing — with a fallback in place for when the response didn't come back in the " +
+          "expected format. Deployment was automated with a Cloud Run multi-stage Docker build.",
+        result: 'Went from planning through frontend, backend, and App Store review in two months, and shipped to iOS.',
       },
     ],
     liveUrl: 'https://apps.apple.com/kr/app/beeve/id6759857773',
