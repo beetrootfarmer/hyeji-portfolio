@@ -694,7 +694,7 @@ export function MindMapView() {
       </svg>
 
       <AnimatePresence>
-        {selectedNodeData && <MindMapSidePanel node={selectedNodeData} onClose={closePanel} />}
+        {selectedNodeData && <MindMapSidePanel node={selectedNodeData} />}
       </AnimatePresence>
     </div>
   );

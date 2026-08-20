@@ -292,7 +292,6 @@ export const mindmapKo: MindmapData = {
     // relation: career -> project (built at / overlapped with)
     { source: 'career-genesisnest', target: 'project-fandom', kind: 'relation' },
     { source: 'career-genesisnest', target: 'project-myfarm', kind: 'relation' },
-    { source: 'career-dankook', target: 'project-beeve', kind: 'relation' },
 
     // relation: education -> project (built during)
     { source: 'edu-ssafy', target: 'project-tify', kind: 'relation' },

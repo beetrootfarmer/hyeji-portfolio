@@ -12,21 +12,6 @@
   cursor: auto;
 }
 
-.mindmap-panel-close {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: var(--bg);
-  color: var(--fg);
-  font-size: 1.25rem;
-  line-height: 1;
-  cursor: none;
-}
-
 .mindmap-panel-eyebrow {
   font-family: var(--font-mono);
   font-size: 0.72rem;

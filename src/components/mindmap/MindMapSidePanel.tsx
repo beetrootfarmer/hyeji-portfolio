@@ -4,14 +4,8 @@ import type { MindmapNode } from '../../data/mindmap/types';
 import { useLocale } from '../../i18n/LocaleContext';
 import './MindMapSidePanel.css';
 
-const text = {
-  en: { close: 'Close detail panel' },
-  ko: { close: '상세 패널 닫기' },
-} as const;
-
 interface MindMapSidePanelProps {
   node: MindmapNode;
-  onClose: () => void;
 }
 
 const TYPE_LABEL = {
@@ -19,9 +13,8 @@ const TYPE_LABEL = {
   ko: { root: '프로필', career: '경력', project: '프로젝트', skill: '스킬', education: '학력' },
 } as const;
 
-export function MindMapSidePanel({ node, onClose }: MindMapSidePanelProps) {
+export function MindMapSidePanel({ node }: MindMapSidePanelProps) {
   const { locale } = useLocale();
-  const t = text[locale];
   const detail = node.detail;
   const prefersReducedMotion = useRef(
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -43,10 +36,6 @@ export function MindMapSidePanel({ node, onClose }: MindMapSidePanelProps) {
       }}
       onClick={(event) => event.stopPropagation()}
     >
-      <button type="button" className="mindmap-panel-close" data-cursor-hover onClick={onClose} aria-label={t.close}>
-        ×
-      </button>
-
       <span className="mindmap-panel-eyebrow">{TYPE_LABEL[locale][node.type]}</span>
       {detail?.period && <span className="mindmap-panel-period">{detail.period}</span>}
       <h3 className="mindmap-panel-title">{node.label}</h3>

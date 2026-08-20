@@ -289,7 +289,6 @@ export const mindmapEn: MindmapData = {
 
     { source: 'career-genesisnest', target: 'project-fandom', kind: 'relation' },
     { source: 'career-genesisnest', target: 'project-myfarm', kind: 'relation' },
-    { source: 'career-dankook', target: 'project-beeve', kind: 'relation' },
 
     { source: 'edu-ssafy', target: 'project-tify', kind: 'relation' },
     { source: 'edu-ssafy', target: 'project-fins', kind: 'relation' },
