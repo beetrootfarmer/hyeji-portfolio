@@ -86,3 +86,9 @@ img {
   margin: 0 auto;
   padding: clamp(4rem, 10vw, 8rem) 0;
 }
+
+.mindmap-page {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+}

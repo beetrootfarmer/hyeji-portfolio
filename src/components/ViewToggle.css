@@ -1,0 +1,32 @@
+.view-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: clamp(5.5rem, 11vw, 7.5rem);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--fg-dim);
+}
+
+.view-toggle button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: none;
+}
+
+.view-toggle button[data-active='true'] {
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .view-toggle {
+    top: 1rem;
+  }
+}
