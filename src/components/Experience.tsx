@@ -35,6 +35,7 @@ const content: Record<'en' | 'ko', ExperienceCopy> = {
         org: 'Dankook University Industry-Academic Cooperation Foundation',
         role: 'Yongin Media Center, Education Operations Team · Web Developer',
         points: [
+          'Planned and built a live chroma-key booth for the Yongin Joayong Festival solo — hand-tracking song select, live YouTube streaming, 550+ participants over two days with zero downtime',
           'Overhauled the Yongin Media Center homepage: traced and fixed 20+ bugs (missing refunds/cancellations, admin errors)',
           'Closed a critical payment side-effect that was creating operational risk',
           'Built a React-based document automation tool to unify a fragmented paperwork process',
@@ -80,6 +81,7 @@ const content: Record<'en' | 'ko', ExperienceCopy> = {
         org: '단국대학교 산학협력단',
         role: '용인특례시 미디어센터 교육운영관리팀, 웹 개발 담당',
         points: [
+          '용인 조아용 페스티벌 크로마키 실시간 합성·송출 체험 부스 단독 기획·개발 — 축제 2일간 550명 이상 체험, 중단 없이 운영',
           '용인특례시 미디어센터 홈페이지 개편 — 환불/취소 누락, 관리자 페이지 오류 등 20여 건의 버그 추적 및 정상화',
           '치명적인 결제 관련 사이드 이펙트를 해결해 운영 리스크 차단',
           'React 기반 증빙서류 자동화 프로그램을 개발해 파편화된 문서 작성 프로세스 통합',

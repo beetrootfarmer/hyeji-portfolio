@@ -77,6 +77,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
           ×
         </button>
 
+        {project.images.length > 0 && (
         <motion.div className="project-detail-gallery" ref={galleryRef} data-cursor-hover>
           <motion.div
             className="project-detail-gallery-track"
@@ -97,6 +98,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             ))}
           </motion.div>
         </motion.div>
+        )}
 
         {project.images.length > 1 && (
           <span className="project-detail-gallery-hint">{t.dragHint}</span>

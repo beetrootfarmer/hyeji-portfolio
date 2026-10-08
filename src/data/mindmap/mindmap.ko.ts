@@ -101,6 +101,23 @@ export const mindmapKo: MindmapData = {
 
     // ---- projects ----
     {
+      id: 'project-joayong',
+      label: '춤춰용! 조아용~',
+      type: 'project',
+      depth: 1,
+      tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Python', 'OBS', 'Canvas'],
+      detail: {
+        period: '2026',
+        summary: '용인 조아용 페스티벌 크로마키 실시간 합성·송출 체험 부스. 기획·개발 단독, 축제 2일간 550명 이상 체험.',
+        bullets: [
+          'OBS 내장 Python 스크립트에 상태를 두고 Next.js UI와 로컬 파일로 연결 — UI가 멈춰도 체험 지속',
+          'MediaPipe 핸드 트래킹과 히스테리시스·dwell 판정으로 비접촉 곡 선택',
+        ],
+        links: [{ label: 'GitHub', url: 'https://github.com/beetrootfarmer/Joayong_dance' }],
+        images: [withBase('7.Joayong/joayong_logo.jpg')],
+      },
+    },
+    {
       id: 'project-beeve',
       label: 'Beeve',
       type: 'project',
@@ -184,6 +201,19 @@ export const mindmapKo: MindmapData = {
 
     // ---- flagship case studies (depth 2) ----
     {
+      id: 'case-joayong-obs',
+      label: '소켓 없는 OBS 제어 구조',
+      type: 'project',
+      depth: 2,
+      tags: ['Python'],
+      detail: {
+        summary:
+          'obs-websocket 대신 OBS 내장 Python 스크립트에 상태머신을 두고, 곡 선택 UI는 선택 확정만 로컬 ' +
+          '파일로 넘기도록 설계했습니다. UI 서버가 죽어도 진행 상태는 영향받지 않습니다.',
+        bullets: ['씬 변경 콜백의 GIL 교착을 폴링 기반 감지로 해결', '축제 2일간 중단 없이 운영'],
+      },
+    },
+    {
       id: 'case-beeve-rppg',
       label: 'rPPG 기반 심박수 측정',
       type: 'project',
@@ -245,6 +275,8 @@ export const mindmapKo: MindmapData = {
     { id: 'skill-python', label: 'Python', type: 'skill', depth: 1, tags: [] },
     { id: 'skill-django', label: 'Django', type: 'skill', depth: 1, tags: [] },
     { id: 'skill-sqlite', label: 'SQLite', type: 'skill', depth: 1, tags: [] },
+    { id: 'skill-obs', label: 'OBS', type: 'skill', depth: 1, tags: [] },
+    { id: 'skill-canvas', label: 'Canvas', type: 'skill', depth: 1, tags: [] },
   ],
 
   links: [
@@ -255,6 +287,7 @@ export const mindmapKo: MindmapData = {
     { source: 'root', target: 'edu-gachon', kind: 'hierarchy' },
     { source: 'root', target: 'edu-ssafy', kind: 'hierarchy' },
     { source: 'root', target: 'edu-konau', kind: 'hierarchy' },
+    { source: 'root', target: 'project-joayong', kind: 'hierarchy' },
     { source: 'root', target: 'project-beeve', kind: 'hierarchy' },
     { source: 'root', target: 'project-fandom', kind: 'hierarchy' },
     { source: 'root', target: 'project-myfarm', kind: 'hierarchy' },
@@ -279,8 +312,11 @@ export const mindmapKo: MindmapData = {
     { source: 'root', target: 'skill-python', kind: 'hierarchy' },
     { source: 'root', target: 'skill-django', kind: 'hierarchy' },
     { source: 'root', target: 'skill-sqlite', kind: 'hierarchy' },
+    { source: 'root', target: 'skill-obs', kind: 'hierarchy' },
+    { source: 'root', target: 'skill-canvas', kind: 'hierarchy' },
 
     // hierarchy: project -> depth 2 case studies
+    { source: 'project-joayong', target: 'case-joayong-obs', kind: 'hierarchy' },
     { source: 'project-beeve', target: 'case-beeve-rppg', kind: 'hierarchy' },
     { source: 'project-fandom', target: 'case-fandom-timezone', kind: 'hierarchy' },
     { source: 'project-myfarm', target: 'case-myfarm-token', kind: 'hierarchy' },
@@ -296,6 +332,7 @@ export const mindmapKo: MindmapData = {
     { source: 'career-fairytech', target: 'skill-react', kind: 'relation' },
 
     // relation: career -> project (built at / overlapped with)
+    { source: 'career-dankook', target: 'project-joayong', kind: 'relation' },
     { source: 'career-genesisnest', target: 'project-fandom', kind: 'relation' },
     { source: 'career-genesisnest', target: 'project-myfarm', kind: 'relation' },
 
@@ -304,6 +341,13 @@ export const mindmapKo: MindmapData = {
     { source: 'edu-ssafy', target: 'project-fins', kind: 'relation' },
 
     // relation: project -> skill
+    { source: 'project-joayong', target: 'skill-nextjs', kind: 'relation' },
+    { source: 'project-joayong', target: 'skill-typescript', kind: 'relation' },
+    { source: 'project-joayong', target: 'skill-mediapipe', kind: 'relation' },
+    { source: 'project-joayong', target: 'skill-python', kind: 'relation' },
+    { source: 'project-joayong', target: 'skill-obs', kind: 'relation' },
+    { source: 'project-joayong', target: 'skill-canvas', kind: 'relation' },
+
     { source: 'project-beeve', target: 'skill-nextjs', kind: 'relation' },
     { source: 'project-beeve', target: 'skill-typescript', kind: 'relation' },
     { source: 'project-beeve', target: 'skill-mediapipe', kind: 'relation' },
@@ -336,6 +380,7 @@ export const mindmapKo: MindmapData = {
 
     // relation: case study -> skill
     { source: 'case-beeve-rppg', target: 'skill-mediapipe', kind: 'relation' },
+    { source: 'case-joayong-obs', target: 'skill-python', kind: 'relation' },
     { source: 'case-myfarm-token', target: 'skill-app-bridge', kind: 'relation' },
   ],
 };

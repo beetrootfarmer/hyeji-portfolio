@@ -3,6 +3,101 @@ import { withBase } from '../lib/asset';
 
 export const projectsEn: Project[] = [
   {
+    slug: 'joayong',
+    year: '2026',
+    title: 'Dance with Joayong!',
+    role: 'Solo · Planning & Development',
+    summary:
+      'A chroma-key booth for the Yongin Joayong Festival: pick a song by hand tracking, get composited into a Joayong dance video live, and stream it to YouTube. 550+ participants over two days.',
+    description:
+      'Built from September to October 2026 at Dankook University Industry-Academic Cooperation ' +
+      'Foundation, where I handled planning, development, and on-site operation alone. Participants ' +
+      'pick a song by holding a hand over its card, then stand in front of a green screen and get ' +
+      'chroma-keyed into a Joayong dance video that streams live to YouTube. Over 550 people tried it ' +
+      'during the two-day festival with no downtime. Below are four core problems from development ' +
+      'and how I solved them.',
+    tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Python', 'OBS', 'Canvas'],
+    thumbnail: withBase('7.Joayong/joayong_logo.jpg'),
+    images: [
+      { src: withBase('7.Joayong/joayong1.jpg'), alt: 'Song select screen with a hand-tracking cursor over a song card' },
+      { src: withBase('7.Joayong/joayong2.jpg'), alt: 'Song select screen showing the participant silhouette and dwell gauge' },
+      { src: withBase('7.Joayong/joayong3.jpg'), alt: 'Countdown screen with participants composited onto a stadium background' },
+      { src: withBase('7.Joayong/joayong4.jpg'), alt: 'Participant chroma-keyed into a Joayong dance video with a tulip field' },
+      { src: withBase('7.Joayong/joayong5.jpg'), alt: 'Participant chroma-keyed into a Joayong dance video with a lemon background' },
+    ],
+    problems: [
+      {
+        title: 'No sockets — the booth keeps running even if the UI dies',
+        problem:
+          'The first design drove OBS from a Node.js control server over obs-websocket. Sockets brought ' +
+          'their own reconnection and state-resync problems, and on a festival floor a single frozen UI ' +
+          'could stop the whole experience.',
+        solution:
+          'I moved the state machine, scene switching, media swaps, and end-of-playback detection into an ' +
+          "OBS-embedded Python script (obspython). The song-select screen (Next.js, OBS Browser Source) holds " +
+          'no state and only writes a confirmed selection to a local file (command.json), which the OBS ' +
+          'script polls every 200ms. Everything runs on localhost on a single streaming PC, so network ' +
+          'failures can only affect the YouTube upload.',
+        result:
+          'If the UI server dies, session state, countdowns, and logs are unaffected and the operator can ' +
+          'take over with hotkeys — the booth ran for two days without interruption.',
+      },
+      {
+        title: 'Touchless song selection with MediaPipe hand tracking',
+        problem:
+          'Selection was first judged by how much of a button was covered by non-green (person) pixels. ' +
+          'Once the song screen became a horizontal card layout centered on screen, participants\' bodies ' +
+          'always covered a card, triggering selections without anyone raising a hand.',
+        solution:
+          'MediaPipe HandLandmarker turns the palm center (average of the wrist and four knuckles) into an ' +
+          'on-screen cursor, with the reachable area scaled to the full screen. How long the cursor rests ' +
+          'on a card feeds a dwell tracker with two-threshold hysteresis and a re-trigger lock, so the gauge ' +
+          'never flickers at the edge and the same card is never selected twice in a row.',
+        result: 'A touchless UI anyone understands without instructions — hold your hand over a card and it plays.',
+        code: {
+          label: 'Hysteresis + dwell',
+          language: 'ts',
+          code: `// Two thresholds so the gauge doesn't flicker at the edge
+if (ratio >= ENTER) active = true;      // start filling
+else if (ratio < EXIT) active = false;  // must clearly leave to reset
+
+// Confirm after 1.8s; after that, the hand must leave to re-arm
+if (active && !locked && now - since >= DWELL_MS) {
+  locked = true;
+  onSelect(card);
+}`,
+        },
+      },
+      {
+        title: 'A green-screen silhouette that survives lighting changes',
+        problem:
+          'The silhouette that shows participants where they stand used fixed RGB thresholds, so shadowed ' +
+          'or wrinkled parts of the green screen were counted as a person. On-site lighting could also ' +
+          'differ from rehearsal.',
+        solution:
+          'Pixels read via Canvas getImageData are converted to HSV, so a pixel stays background as long as ' +
+          'its hue is green, even when brightness drops. A one-key calibration samples the venue\'s green ' +
+          'screen and sets hue to mean ±3σ and saturation/brightness floors from the observed lows, and it ' +
+          'refuses to calibrate if someone is standing in the area.',
+        result: 'The silhouette stays stable through shadows and lighting changes, and can be recalibrated on the spot.',
+      },
+      {
+        title: 'A GIL deadlock and ignored pauses in OBS scripting',
+        problem:
+          'Registering a scene-change callback to detect manual scene switches froze all of OBS: a ' +
+          'graphics-thread timer held the GIL while waiting on the UI thread, which was waiting for the GIL ' +
+          'to run the callback. Separately, a video paused during the countdown would start playing anyway, ' +
+          'because the restart was processed later on the media thread and undid the pause.',
+        solution:
+          'I dropped the callback and checked the current scene inside the existing polling timer instead, ' +
+          'skipping the check for 1.5s after the script switches scenes itself. During countdowns, a 50ms ' +
+          'timer watches playback state and re-pauses whenever it detects playback.',
+        result: 'Both the OBS freeze and the early playback during countdowns were eliminated.',
+      },
+    ],
+    repoUrls: [{ label: 'GitHub', url: 'https://github.com/beetrootfarmer/Joayong_dance' }],
+  },
+  {
     slug: 'beeve',
     year: '2025',
     title: 'Beeve',
